@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Radiation Monitor System | SINAP' });
+  res.render('index', { title: '' });
 });
 
 module.exports = router;
