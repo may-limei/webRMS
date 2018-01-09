@@ -1,6 +1,8 @@
 {
     "openedPathsList": {
-        "workspaces": [],
+        "workspaces": [
+            "/home/may"
+        ],
         "files": [
             "/home/may/pro/webRMS/app.js"
         ]

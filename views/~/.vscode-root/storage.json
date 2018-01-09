@@ -15,6 +15,11 @@
             "label": "Ctrl+Shift+T",
             "isNative": true
         },
+        "workbench.action.openRecent": {
+            "id": "workbench.action.openRecent",
+            "label": "Ctrl+R",
+            "isNative": true
+        },
         "workbench.action.files.save": {
             "id": "workbench.action.files.save",
             "label": "Ctrl+S",
@@ -436,5 +441,20 @@
             "/opt/github/RMS_WEB"
         ],
         "files": []
+    },
+    "windowsState": {
+        "openedWindows": [],
+        "openedFolders": [],
+        "lastActiveWindow": {
+            "folderPath": "/home/may/pro/webRMS",
+            "backupPath": "/home/may/pro/webRMS/views/~/.vscode-root/Backups/bb18d9f666302375af542337b4d2e062",
+            "uiState": {
+                "mode": 0,
+                "x": 0,
+                "y": 65,
+                "width": 1920,
+                "height": 981
+            }
+        }
     }
 }

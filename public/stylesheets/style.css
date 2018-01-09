@@ -6,3 +6,93 @@ body {
 a {
   color: #00B7FF;
 }
+
+
+/*-----------*/
+
+.header{
+	background: url("../images/banner.jpg") no-repeat;
+	background-size: cover;
+	min-height:865px;
+}
+.header-top {
+  padding: 2.5em 0;
+  background:rgba(43, 121, 144, 0.22);
+ }
+ .container:after { content: "\0020"; display: block; height: 0; clear: both; visibility: hidden; }
+
+ @media (max-width: 1024px){
+	.top-menu ul li a {
+	  font-size: 1.2em;
+  }
+}
+
+@media (max-width: 780px){
+  .top-menu {
+    float:none;
+    width: 100%;
+    text-align:right;
+  }
+  .top-menu  ul{
+    display:none;
+  }
+  .top-menu  ul li {
+    font-size: 14px;
+    display:block;
+    
+  }
+  .top-menu ul li{
+    display:block;
+    float:none;
+    margin: 0em;
+    border-bottom: 1px solid #4B6075;
+    border-right:none;
+  }
+  .top-menu ul li {
+
+    padding:10px 0 ;
+  }
+  .top-menu  ul{
+    margin:15px 0;
+    z-index: 999;
+    position: absolute;
+    width: 96%;
+    background:#2e3e4e;
+    text-align: center;
+  }
+  .top-menu ul li a {
+    display: block;
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 640px){
+  .top-menu ul li a {
+      font-size: 1.15em;
+  }
+  .top-menu ul li {
+      padding: 4px 0;
+  }
+  .top-menu ul {
+    margin: 14px 0;
+    width: 95.5%;
+   }
+}
+
+@media (max-width: 480px){
+	.top-menu ul {
+  		width: 93%;
+  }
+}
+
+@media (max-width: 320px){
+	.top-menu ul {
+	  width: 90%;
+	}
+	.top-menu ul {
+  		margin: 3px 0;
+  	}
+  	.top-menu ul li a {
+  		font-size: 1.1em;
+  }
+}
