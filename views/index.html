@@ -1,484 +1,321 @@
+<!DOCTYPE HTML>
 <!--
-	Author: may
-	Author URL: http://
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<!DOCTYPE html>
-<html lang="en">
-<!-- Head -->
-<head>
-<title>Radiation Monitoring System | <%= title %></title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="utf-8">
-<meta name="keywords" content="RMS, radiation monitoring system, webRMS, sinap, EPICS, epics, tmsr" />
+<html>
+	<head>
+		<title>辐射防护在线监测系统 | <%=title %></title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body class="homepage">
+		<div id="page-wrapper">
 
-<!-- Testimonials-slider-css-files -->
-	<link rel="stylesheet" href="stylesheets/owl.carousel.css" type="text/css" media="all">
-	<link href="stylesheets/owl.theme.css" rel="stylesheet">
-<!-- //Testimonials-slider-css-files -->
+			<!-- Header -->
+				<div id="header">
 
-<!-- Bootstrap-CSS -->	<link rel="stylesheet" href="stylesheets/bootstrap.min.css" type="text/css" media="all">
-<!-- Fontawesome-CSS --><link href="stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
-		
-<!-- Nav-CSS -->	
-<link href="stylesheets/nav.css" rel="stylesheet" type="text/css" media="all" />
- <script src="javascripts/modernizr.custom.js"></script>
-<!-- //Nav-CSS -->	
-	
-<!-- stylesheet for gallery section --><link rel="stylesheet" type="text/css" href="stylesheets/gallery.css"/><!-- //stylesheet for gallery section -->
-		
-<link rel="stylesheet" type="text/css" href="stylesheets/style-o.css" /><!-- style-CSS -->
-		
-<!-- fonts -->
-	<link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
-	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
+					<!-- Inner -->
+						<div class="inner">
+							<header>
+								<h1><a href="index.html" id="logo">首页</a></h1>
+								<hr />
+								<p>Another fine freebie by HTML5 UP</p>
+							</header>
+							<footer>
+								<a href="#banner" class="button circled scrolly">开始</a>
+							</footer>
+						</div>
 
-<!-- fonts -->
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li><a href="index.html"><strong>首页</strong></a></li>
+								<li>
+									<a href="">监测点</a>
+									<ul>
+										<li><a href="point-environment.html">环境</a></li>
+										<li><a href="point-103.html">103楼（放化）</a></li>
+										<li><a href="point-104.html">104楼（三废处理）</a></li>
+										<li><a href="point-106.html">106楼（废物暂存）</a></li>
+										<li><a href="point-109.html">109楼（中子物理）</a></li>
+										<li><a href="point-112.html">112楼（电子辐照）</a></li>
+										<li><a href="point-115.html">115楼（加速器）</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="left-sidebar.html">仪器状态</a>
+									<ul>
+										<li><a href="#">PRMS（工艺Gamma监测仪）</a></li>
+										<li><a href="#">ERMS（环境Gamma监测仪）</a></li>
+										<li><a href="#">AGMS（区域Gamma监测仪）</a></li>
+										<li><a href="#">ANMS（区域中子射监测仪）</a></li>
+										<li><a href="#">GEMS（放射性气溶胶监测仪）</a></li>
+										<li><a href="#">LEMS（放射性废液监测仪）</a></li>
+									</ul>
+								</li>
+								<li><a href="right-sidebar.html">监测日志</a></li>
+								<li><a href="no-sidebar.html">关于</a></li>
+							</ul>
+						</nav>
 
-
-<!-- Default-JavaScript-File -->
-	<script type="text/javascript" src="javascripts/jquery-2.1.4.min.js"></script>
-<!-- //Default-JavaScript-File -->
-
-<!-- scrolling script -->
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-		});
-	});
-</script>
-<!-- //scrolling script -->
-
-<link rel="shortcut icon" href="images/favicon.ico" />
-
-</head>
-<!-- Head -->
-<body>
-<!-- logo section -->
-<div class="logo">
-	<a href="index.html"><h1><span>I</span>nterior <span>M</span>aker</h1></a>
-</div>
-<!-- /logo section -->
-<!-- navigation section -->
-<div>
-	<p>
-		<button id="trigger-overlay" type="button">
-			<i class="fa fa-bars" aria-hidden="true"></i>
-		</button>
-	</p>
-</div>
-	<!-- open/close -->
-		<div class="overlay overlay-hugeinc">
-			<button type="button" class="overlay-close">Close</button>
-			<nav>
-				<ul>
-					<li><a href="#index.html" class="scroll">Home</a></li>
-					<li><a href="#about" class="scroll" >About</a></li>
-					<li><a href="#gallery" class="scroll" >Gallery</a></li>
-					<li><a href="#contact" class="scroll" >Contact</a></li>
-				</ul>
-			</nav>
-		</div>
-	<!-- /open/close -->
-<!-- /navigation section -->
-
-
-
-<div>
-
-
-
-	
-<div class="header" id="head">
-		<div class="header-top">
-				<div class="container">
-			<div class="logo">
-				<a href="index.html"><img src="images/logo.png"></a>
 				</div>
-				<div class="top-menu">
-					<span class="menu"> </span>
-				<ul>
-					<li><a href="#home" class="active" class="scroll">home</a></li>
-						<li><a href="#aboutus" class="scroll">about us</a></li>
-							 <li><a href="#services" class="scroll">services</a></li>
-								 <li><a href="#portfolio" class="scroll">portfolio</a></li>
-									 <li><a href="#testimonial" class="scroll">testimonial</a></li>
-										  <li><a href="#team" class="scroll">team</a></li>
-											 <li><a href="#pricing" class="scroll">pricing</a></li>
-												<li><a href="#blog" class="scroll">blog</a></li>
-													 <li><a href="#contact" class="scroll">contact</a></li>
-						</ul>
+
+			<!-- Banner -->
+				<section id="banner">
+					<header class="container special">
+						<h2 style="font-size:2.5em"> <strong >辐射防护在线监测系统</strong> - 嘉定园区</h2>
+						<p style="font-size:1.1em; text-align: left; text-indent:2em">
+							在嘉定园区内设置5个环境γ监测点，通过有线网络通讯方式将实时监测数据传送至环境监测中心的环境γ监测计算机。
+							计算机可以显示各个监测点的实时数据，可以存储、回调历史数据，以及生成、打印各种报表。
+							该计算机还能实现二次联网功能，将关键的实时数据传送至应急指挥中心的专用终端，在专用终端上可以查看各个监测点的时是数据和报警状态。
+						</p>
+					</header>
+				</section>
+
+			<!-- Carousel -->
+				<section class="carousel">
+					<div class="reel">
+
+						<article>
+							<a href="point-environment.html" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+							<header>
+								<h3><a href="point-environment.html">园区环境监测点</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+						<article>
+							<a href="point-103.html" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+							<header>
+								<h3><a href="point-103.html">103楼-放化实验室</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+						<article>
+							<a href="point-104.html" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
+							<header>
+								<h3><a href="point-104.html">104楼-放射性三废处理设施</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+						<article>
+							<a href="point-106.html" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
+							<header>
+								<h3><a href="point-106.html">106-放射性废物暂存库</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+						<article>
+							<a href="point-109.html" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
+							<header>
+								<h3><a href="point-109.html">109楼-中子物理实验装置</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+						<article>
+							<a href="point-112.html" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+							<header>
+								<h3><a href="point-112.html">112楼-电子辐照实验装置</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+						<article>
+							<a href="point-115.html" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+							<header>
+								<h3><a href="point-115.html">115楼-电子直线加速器</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
 					</div>
-					 <!--script-nav-->
-		 <script>
-		 $("span.menu").click(function(){
-		 $(".top-menu ul").slideToggle("slow" , function(){
-		 });
-		 });
-		 </script>
-	
-					<div class="clearfix"> </div>
-					</div>
-					</div>
+				</section>
+
+			<!-- Footer -->
+				<div id="footer">
+					<div class="container">
+						<div class="row">
+
+							<!-- 监测仪 -->
+								<section class="4u 12u(mobile)">
+									<header>
+										<h2 class="icon fa-instagram circled"><span class="label">仪器状态</span></h2><!-- 图标的内容 -->
+									</header>
+									<ul class="divided">
+										<li>
+											<br>
+											<article class="tweet">
+												<h4 style="text-align: center"><a href="#">PRMS - 工艺Gamma监测仪</a></h4>
+											</article>
+										</li>
+										<li>
+											<article class="tweet">
+												<h4 style="text-align: center"><a href="#">ERMS - 环境Gamma监测仪</a></h4>
+											</article>
+										</li>
+										<li>
+											<article class="tweet">
+												<h4 style="text-align: center"><a href="#">AGMS - 区域Gamma监测仪</a></h4>
+											</article>
+										</li>
+										<li>
+											<article class="tweet">
+												<h4 style="text-align: center"><a href="#">ANMS - 区域中子射监测仪</a></h4>
+											</article>
+										</li>
+										<li>
+											<article class="tweet">
+												<h4 style="text-align: center"><a href="#">GEMS - 放射性气溶胶监测仪</a></h4>
+											</article>
+										</li>
+										<li>
+											<article class="tweet">
+												<h4 style="text-align: center"><a href="#">LEMS - 放射性废液监测仪</a></h4>
+											</article>
+										</li>
+									</ul>
+								</section>
+
+							<!-- Posts -->
+							<section class="4u 12u(mobile)">
+								<header>
+									<h2 class="icon fa-file circled"><span class="label">监测点</span></h2>
+								</header>
+								<ul class="divided">
+									<li>
+										<article class="post stub">
+											<header>
+												<h4><a href="#">环境监测</a></h4>
+											</header>
+										</article>
+									</li>
+									<li>
+										<article class="post stub">
+											<header>
+												<h4><a href="#">103楼-放化实验室</a></h4>
+											</header>
+										</article>
+									</li>
+									<li>
+										<article class="post stub">
+											<header>
+												<h4><a href="#">104楼-放射性三废处理设施</a></h4>
+											</header>
+										</article>
+									</li>
+									<li>
+										<article class="post stub">
+											<header>
+												<h4><a href="#">106-放射性废物暂存库</a></h4>
+											</header>
+										</article>
+									</li>
+									<li>
+										<article class="post stub">
+											<header>
+												<h4><a href="#">109楼-中子物理实验装置</a></h4>
+											</header>
+										</article>
+									</li>
+									<li>
+										<article class="post stub">
+											<header>
+												<h4><a href="#">112楼-电子辐照实验装置</a></h4>
+											</header>
+										</article>
+									</li>
+									<li>
+										<article class="post stub">
+											<header>
+												<h4><a href="#">115楼-电子直线加速器</a></h4>
+											</header>
+										</article>
+									</li>
+								</ul>
+							</section>
+
+						<!-- Photos -->
+							<section class="4u 12u(mobile)">
+								<header>
+									<h2 class="icon fa-camera circled"><span class="label">Photos</span></h2>
+								</header>
+								<div class="row 25% no-collapse">
+									<div class="6u">
+										<a href="#" class="image fit"><img src="images/pic10.jpg" alt="" /></a>
+									</div>
+									<div class="6u">
+										<a href="#" class="image fit"><img src="images/pic11.jpg" alt="" /></a>
+									</div>
+								</div>
+								<div class="row 25% no-collapse">
+									<div class="6u">
+										<a href="#" class="image fit"><img src="images/pic12.jpg" alt="" /></a>
+									</div>
+									<div class="6u">
+										<a href="#" class="image fit"><img src="images/pic13.jpg" alt="" /></a>
+									</div>
+								</div>
+								<div class="row 25% no-collapse">
+									<div class="6u">
+										<a href="#" class="image fit"><img src="images/pic14.jpg" alt="" /></a>
+									</div>
+									<div class="6u">
+										<a href="#" class="image fit"><img src="images/pic15.jpg" alt="" /></a>
+									</div>
+								</div>
+							</section>
 
 
+						</div>
+						<hr />
+						<div class="row">
+							<div class="12u">
 
-<!-- banner section -->	 
-<section class="banner" id="home"> 
-	<!-- Slider -->
-		<div class="slider">
-			<ul class="rslides" id="slider">
-				<li class="first-slide w3ls">
-					<img src="../images/carousel-images/sinap-gate.jpg" alt="Couch Hunter" >
-					<h3>sinap-gate.jpg</h3>
-					<h4>---Designed by W3layouts</h4>
-				</li>
-				<li class="second-slide aits">
-					<img src="../images/carousel-images/canteen1.jpg" alt="Couch Hunter">
-					<h3>canteen1.jpg</h3>
-					<h4>---Designed by W3layouts</h4>
-				</li>
-				<li class="third-slide w3-agileits">
-					<img src="../images/carousel-images/canteen.jpg" alt="Couch Hunter">
-					<h3>canteen.jpg</h3>
-					<h4>---Designed by w3layouts</h4>
-				</li>
-				<li class="fourth-slide agileinfo">
-					<img src="../images/carousel-images/ssrf.jpg" alt="Couch Hunter">
-					<h3>ssrf.jpg</h3>
-					<h4>---Designed by W3layouts</h4>
-				</li>
-				<li class="fifth-slide wthree">
-					<img src="../images/carousel-images/ssrf1.jpg" alt="Couch Hunter">
-					<h3>ssrf1.jpg </h3>
-					<h4>---Designed by W3layouts</h4>
-				</li>
-			</ul>
-		</div>
-	<!-- //Slider -->
-</section>	
-<!-- /banner section -->
+								<!-- Contact -->
+									<section class="contact">
+										<header>
+											<h3>联系我们</h3>
+										</header>
+										<p>地址： 上海市嘉定区嘉罗公路2019号（201800）</p>
+										<p>邮箱： email@sinap.ac.cn</p>
+										<p>电话： 021 - 12345678</p>
+									</section>
 
-<!-- About section -->
-<section class="about" id="about">
-	<div class="container">
-		<div class="heading">
-			<h3>About</h3>
-		</div>
-		
-		<!-- model-video -->
-		<div class="wthree-model-video jarallax">
-				<h2>Our Demo video</h2>
-				<h4>Watch Video</h4>
-				<a class="#" data-toggle="modal" data-target="#myModal1">
-					<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
-				</a>
-				<p>Maecenas venenatis erat a quam sollicitudin, sed pretium nisi pharetra. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec aliquam nunc maximus arcu consequat posuere. Quisque malesuada vitae nibh a accumsan. Sed vel urna non libero posuere porttitor condimentum vitae odio.</p>	
-		
-		</div>
-				<!-- Modal5 -->
-				<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" >
-					<div class="modal-dialog">
-					<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button> 
-								<!-- <iframe src="https://player.vimeo.com/video/88224399"></iframe>	-->
-								<iframe src="https://player.vimeo.com/video/122016314"></iframe>
+								<!-- Copyright -->
+									<div class="copyright">
+										<ul class="menu">
+												<li>&copy; <a href="http://www.sinap.cas.cn/">中国科学院上海应用物理研究所</a></li><li>钍基熔盐堆先进核能系统</li>
+										</ul>
+									</div>
+
 							</div>
+
 						</div>
 					</div>
 				</div>
-				<!-- //Modal5 -->
-		<!-- //model-video -->
 
-		<div class="about-grids">
-			<div class="col-md-4 about-grid1">
-				<h4> platea dictumst.</h4>
-				<p>Elementum vel condimentum a, dignissim ultrices diam. Integer iaculis, dui eu lobortis Integer iaculis, dui eu lobortis </p>
-			</div>
-			<div class="col-md-4 about-grid1">
-				<h4>Dictumst In hac.</h4>
-				<p>Elementum vel condimentum a, dignissim ultrices diam. Integer iaculis, dui eu lobortis Integer iaculis, dui eu lobortis </p>
-			</div>
-			<div class="col-md-4 about-grid1">
-				<h4>In hac habitasse .</h4>
-				<p>Elementum vel condimentum a, dignissim ultrices diam. Integer iaculis, dui eu lobortis Integer iaculis, dui eu lobortis </p>
-			</div>
-			<div class="clearfix"></div>
 		</div>
-	</div>
-</section>
-<!-- About section -->
 
-<!-- gallery -->	
-	<section class="agileits-gallery heading gallery" id="gallery">
-	<div class="container">
-		<h3 class="agileits-title">Gallery</h3>
-		<div id="thumbGrid" data-thumbgrid="true" data-effect="scaleIn" data-delay="60" data-timing="800" data-pagination="6" data-galleryeffectnext="scaleIn" data-galleryeffectprev="scaleOut">
-			<img src="../images/ga1.jpg"
-				 alt="img01"
-				 data-highres="../images/ga1.jpg"
-				 data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-					/>
-			<img src="../images/ga2.jpg"
-				 alt="img02"
-				 data-highres="../images/ga2.jpg"
-				 data-caption="Nullam quis risus eget urna mollis ornare vel eu leo."
-					/>
-			<img src="../images/ga3.jpg"
-				 alt="img03"
-				 data-highres="../images/ga3.jpg"
-				 data-caption="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."
-					/>
-			<img src="../images/ga4.jpg"
-				 alt="img04"
-				 data-highres="../images/ga4.jpg"
-				 data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-					/>
-			<img src="../images/ga5.jpg"
-				 alt="img05"
-				 data-highres="../images/ga5.jpg"
-				 data-caption="Nullam quis risus eget urna mollis ornare vel eu leo."
-					/>
-			<img src="../images/ga6.jpg"
-				 alt="img06"
-				 data-highres="../images/ga6.jpg"
-				 data-caption="Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit."
-					/>
-			<img src="../images/ga7.jpg"
-				 alt="img07"
-				 data-highres="../images/ga7.jpg"
-				 data-caption="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."
-					/>
-			<img src="../images/ga1.jpg"
-				 alt="img08"
-				 data-highres="../images/ga1.jpg"
-				 data-caption="Cras mattis consectetur purus sit amet fermentum."
-					/>
-			<img src="../images/ga2.jpg"
-				 alt="img09"
-				 data-highres="../images/ga2.jpg"
-				 data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-					/>
-			<img src="../images/ga3.jpg"
-				 alt="img10"
-				 data-highres="../images/ga3.jpg"
-				 data-caption="Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit."
-					/>
-			<img src="../images/ga4.jpg"
-				 alt="img11"
-				 data-highres="../images/ga4.jpg"
-				 data-caption="Nullam quis risus eget urna mollis ornare vel eu leo."
-					/>
-			<img src="../images/ga5.jpg"
-				 alt="img12"
-				 data-highres="../images/ga5.jpg"
-				 data-caption="Cras mattis consectetur purus sit amet fermentum."
-					/>
-					<!-- =================================================================================================================================-->
-			<img src="images/ga6.jpg"
-				 alt="img13"
-				 data-highres="images/ga6.jpg"
-				 data-caption="Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit."
-					/>
-			<img src="images/ga7.jpg"
-				 alt="img14"
-				 data-highres="images/ga7.jpg"
-				 data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-					/>
-			<img src="images/ga1.jpg"
-				 alt="img15"
-				 data-highres="images/ga1.jpg"
-				 data-caption="Nullam quis risus eget urna mollis ornare vel eu leo."
-					/>
-			<img src="images/ga2.jpg"
-				 alt="img16"
-				 data-highres="images/ga2.jpg"
-				 data-caption="Cras mattis consectetur purus sit amet fermentum."
-					/>
-			<img src="images/ga3.jpg"
-				 alt="img17"
-				 data-highres="images/ga3.jpg"
-				 data-caption="Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit."
-					/>
-			<img src="images/ga4.jpg"
-				 alt="img18"
-				 data-highres="images/ga4.jpg"
-				 data-caption="Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit."
-					/>
-			<img src="images/ga5.jpg"
-				 alt="img19"
-				 data-highres="images/ga5.jpg"
-				 data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-					/>
-			<img src="images/ga6.jpg"
-				 alt="img20"
-				 data-highres="images/ga6.jpg"
-				 data-caption="Cras mattis consectetur purus sit amet fermentum."
-					/>
-			<img src="images/ga7.jpg"
-				 alt="img21"
-				 data-highres="images/ga7.jpg"
-				 data-caption="Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit."
-					/>
-			<img src="images/ga1.jpg"
-				 alt="img22"
-				 data-highres="images/ga1.jpg"
-				 data-caption="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."
-					/>
-		</div>
-	</div>
-</section>
-	<!-- //gallery -->	
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.onvisible.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/bootstrap3-3-7.min.js"></script>
+			<script src="assets/js/bootstrap3-3-7.min.css"></script>
+			<script src="assets/js/main.js"></script>
 
-<!-- contact section -->
-<section class="contact" id="contact">
-	<div class="container">
-		<div class="heading">
-			<h3>Contact us</h3>
-		</div>
-		<div class="col-md-6 contact-left">
-			<div class="contact-inner-left">
-				<h3>get in touch</h3>
-				<h4>Contact for More Details</h4>
-				<p>Sed sed ligula in felis sodales iaculis. Duis bibendum justo non viverra accumsan. Praesent et elementum tortor. </p>
-
-				<h4 class="contact-between">Interested to join with us?</h4>
-				<p>Sed sed ligula in felis sodales iaculis. Duis bibendum justo non viverra accumsan. Praesent et elementum tortor. </p>
-				<div class="agileinfo_footer_grid">
-					<h4>Address</h4>
-					<ul>
-						<li><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 上海市嘉定区嘉罗公路2019号（201800）</li>
-						<li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:wulimei@sinap.ac.cn">wulimei@sinap.ac.cn</a></li>
-						<li><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> 021-12345678 </li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- /contact section -->
-
-<!-- footer -->
-<!-- //footer -->
-
-<!-- copyright -->
-<div class="copyright-agile">
-	<p>&copy; 2018 中国科学院上海应用物理研究所 | 钍基熔盐堆先进核能系统</p>
-</div>
-<!-- //copyright -->
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-	<!-- here stars scrolling icon -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-			/*
-				var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear' 
-				};
-			*/
-								
-			$().UItoTop({ easingType: 'easeOutQuart' });
-								
-			});
-	</script>
-	<!-- //here ends scrolling icon -->
-
-<!-- js files for gallery section -->
-	<script src="../javascripts/jquery.mb.CSSAnimate.min.js"></script>
-	<script src="../javascripts/jquery.mb.thumbGrid.js"></script>
-	<script>
-		jQuery(function () {
-			jQuery("[data-thumbgrid]").thumbGrid();
-
-	//    customize
-			jQuery("#effect").on("change",function(){
-				var x = $(this).val();
-				jQuery("#thumbGrid").data("effect", x);
-			});
-
-			jQuery("#delay").on("change",function(){
-				var x = parseFloat($(this).val());
-				jQuery("#thumbGrid").data("delay", x);
-			});
-
-			jQuery("#timing").on("change",function(){
-				var x = parseFloat($(this).val());
-				jQuery("#thumbGrid").data("timing", x);
-			});
-		});
-	</script>
-<!-- //js files for gallery section -->
-
-<!-- js for smooth scrollings -->
-	<script src="../javascripts/SmoothScroll.min.js"></script>
-<!-- js for smooth scrollings -->
-
-<!-- Resopnsive-Slider-JavaScript -->
-			<script src="../javascripts/responsiveslides.min.js"></script>
-			<script>
-				$(function () {
-					$("#slider").responsiveSlides({
-						auto: true,
-						nav: true,
-						speed: 2000,
-						namespace: "callbacks",
-						pager: true,
-					});
-				});
-			</script>
-<!-- //Resopnsive-Slider-JavaScript -->
-
-	<!-- for nav menu-js-file-->
-		<script src="../javascripts/classie.js"></script>
-		<script src="../javascripts/demo1.js"></script>
-	<!-- for nav menu-js-file-->
-	
-<!-- for testimonials slider-js-script-->
-
-	<!-- for testimonials slider-js-file-->
-			<script src="../javascripts/owl.carousel.js"></script>
-	<!-- //for testimonials slider-js-file-->
-		<script>
-		$(document).ready(function() { 
-		$("#owl-demo").owlCarousel({
- 
-			autoPlay: 3000, //Set AutoPlay to 3 seconds
-			autoPlay:true,
-			items : 3,
-			itemsDesktop : [640,5],
-			itemsDesktopSmall : [414,4]
-		});
-		}); 
-</script>
-<!-- for testimonials slider-js-script-->
-
-<!-- move to top-js-files -->
-	<script type="text/javascript" src="javascripts/move-top.js"></script>
-	<script type="text/javascript" src="javascripts/easing.js"></script>
-<!-- //move to top-js-files -->
-
-<!-- Default-JavaScript-File -->
-	<script type="text/javascript" src="javascripts/bootstrap.min.js"></script>
-<!-- //Default-JavaScript-File -->
-
-</body>
-<!-- //body -->
+	</body>
 </html>
-<!-- html -->

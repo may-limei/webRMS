@@ -1,6 +1,8 @@
 {
     "openedPathsList": {
         "workspaces": [
+            "/home/may/pro/webRMS",
+            "/home/may/pro/webRMS",
             "/home/may"
         ],
         "files": [
@@ -66,7 +68,7 @@
         },
         "workbench.action.closeWindow": {
             "id": "workbench.action.closeWindow",
-            "label": "Ctrl+W",
+            "label": "Ctrl+Shift+W",
             "isNative": true
         },
         "workbench.action.closeFolder": {
@@ -446,15 +448,16 @@
         "openedWindows": [],
         "openedFolders": [],
         "lastActiveWindow": {
-            "folderPath": "/home/may",
-            "backupPath": "/home/may/pro/webRMS/~/.vscode-root/Backups/11a08e3d54389bb6eba8f69346ede5ad",
+            "folderPath": "/home/may/pro/webRMS",
+            "backupPath": "/home/may/pro/webRMS/~/.vscode-root/Backups/bb18d9f666302375af542337b4d2e062",
             "uiState": {
-                "mode": 0,
-                "x": 0,
-                "y": 65,
-                "width": 1920,
-                "height": 981
+                "mode": 1,
+                "x": 623,
+                "y": 81,
+                "width": 1024,
+                "height": 768
             }
         }
-    }
+    },
+    "pickerWorkingDir": "/home/may/pro"
 }
