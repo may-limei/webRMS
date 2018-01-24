@@ -11,6 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/bootstrap3-3-7.min.css">
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 
 		<script type="text/javascript" src="./assets/js/jquery-1.8.3.js"></script>
@@ -61,13 +62,33 @@
 					<div id="svgarea" style="height:900px; width:100%" class="12u">
 					</div>
 				</div>
-
+			
 			<!-- 折线图line -->
 				<div class="wrapper style1">
 					<div class="container">
 						<div class="row 200%">
 							<div class="8u 12u(mobile)" id="content">
-								<div id="linearea" style="height:800px; width:100%">
+								<ul id="myTab" class="nav nav-tabs">
+									<li class="active">
+										<a href="#linearea" data-toggle="tab">
+											Real-time Data
+										</a>
+									</li>
+									<li>
+										<a href="#historical-data" data-toggle="tab">
+											Historical Data
+										</a>
+									</li>
+								</ul>
+
+								<div id="myTabContent" class="tab-content">
+									<div id="linearea" style="height:800px; width:100%" class="tab-pane fade in active">
+									</div>
+									<div id="historical-data" style="height:800px; width:100%" class="tab-pane fade">
+										<p>test historical-data div</p>
+										<p>test historical-data div</p>
+										<p>test historical-data div</p>
+									</div>
 								</div>
 							</div>
 							<div class="4u 12u(mobile)" id="sidebar">

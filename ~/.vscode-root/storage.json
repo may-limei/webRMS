@@ -2,7 +2,6 @@
     "openedPathsList": {
         "workspaces": [
             "/home/may/pro/webRMS",
-            "/home/may/pro/webRMS",
             "/home/may"
         ],
         "files": [
@@ -68,7 +67,7 @@
         },
         "workbench.action.closeWindow": {
             "id": "workbench.action.closeWindow",
-            "label": "Ctrl+Shift+W",
+            "label": "Ctrl+W",
             "isNative": true
         },
         "workbench.action.closeFolder": {
