@@ -76,18 +76,20 @@
 								<ul id="myTab" class="nav nav-tabs">
 									<li class="active">
 										<a href="#gaugedata" data-toggle="tab">
-											Real-time Data
+											实时数据
 										</a>
 									</li>
 									<li>
 										<a href="#historical-data" data-toggle="tab">
-											Historical Data
+											历史数据
 										</a>
 									</li>
 								</ul>
 
 								<div id="myTabContent" class="tab-content">
-									<div id="gaugedata" style="height:800px; width:100%" class="tab-pane fade in active">
+									<div class="tab-pane fade in active">
+										<div id="gaugedata" style="height:400px; width:100%" ></div>
+										<div id="realtimeLine" style="height:400px; width:100%"></div>
 									</div>
 									<div id="historical-data" style="height:800px; width:100%" class="tab-pane fade">
 										<p>test historical-data div</p>
@@ -303,6 +305,7 @@
 		require.config({
 			paths: {
 				'echarts': 'assets/js/echarts/echarts',
+				'echarts/chart/line': 'assets/js/echarts/chart/line',
 				'echarts/chart/bar': 'assets/js/echarts/chart/bar',
 				'echarts/chart/map': 'assets/js/echarts/chart/map',
 				'echarts/chart/gauge': 'assets/js/echarts/chart/gauge'
@@ -621,5 +624,102 @@
 		  
 	}
 </script>
+
+
+<script src="assets/js/lib/facePrint.js"></script>
+<script type="text/javascript">
+	require([
+	 'echarts',
+	 'echarts/chart/line',
+	 'echarts/component/tooltip',
+	 'echarts/component/legend',
+	 'echarts/component/grid'
+], function (e) {
+
+	function randomData() {
+		return (Math.random() + 3).toFixed(3);
+	}
+
+	var chartLine = e.init(document.getElementById('realtimeLine'), null, {
+
+	});
+
+		function randomData() {
+		now = new Date(+now + oneDay);
+		value = value + Math.random() * 21 - 10;
+		return {
+		name: now.toString(),
+		value: [
+		[now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+		Math.round(value)
+		]
+		}
+		}
+
+		var dataLine = [];
+		var now = +new Date(1997, 9, 3);
+		var oneDay = 24 * 3600 * 1000;
+		var value = Math.random() * 1000;
+		for (var i = 0; i < 1000; i++) {
+		dataLine.push(randomData());
+		}
+
+		optionLine = {
+			backgroundColor: '#fbfbfb',
+			title: {
+			text: '动态数据 + 时间坐标轴'
+			},
+			tooltip: {
+			trigger: 'axis',
+			formatter: function (params) {
+			params = params[0];
+			var date = new Date(params.name);
+			return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
+			},
+			axisPointer: {
+			animation: false
+			}
+			},
+			xAxis: {
+			type: 'time',
+			splitLine: {
+			show: false
+			}
+			},
+			yAxis: {
+			type: 'value',
+			boundaryGap: [0, '100%'],
+			splitLine: {
+			show: false
+			}
+			},
+			series: [{
+			name: '模拟数据',
+			type: 'line',
+			showSymbol: false,
+			hoverAnimation: false,
+			data: dataLine
+			}]
+		};
+
+		setInterval(function () {
+
+		for (var i = 0; i < 5; i++) {
+		dataLine.shift();
+		dataLine.push(randomData());
+		}
+
+		chartLine.setOption({
+		series: [{
+		data: dataLine
+		}]
+		});
+		}, 1000);
+
+		chartLine.setOption(optionLine);
+		})
+	</script>
+
+
 
 </html>
