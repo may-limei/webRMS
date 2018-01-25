@@ -606,26 +606,27 @@
 					]
 				};
 
-                chart.setOption(option);
+				//chart.setOption(option);
+				var timeTicket = function () {};
+				clearInterval(timeTicket);
+				timeTicket = setInterval(function (){
+					option.series[0].data = [{value:(Math.random()*100).toFixed(2)-0, name: 'mGy/h'}];
+					chart.setOption(option,true);
+				},1000) 
+
 			},
 		);
-		
-		clearInterval(timeTicket);
-		var timeTicket = setInterval(function (){
-			option.series[0].data[0].value = (Math.random()*100).toFixed(2);
-			myChart.setOption(option,true);
-		},2000)      
-		
+				
 	</script>
 
-	<script language=javascript>
-		var int=self.setInterval("clock()",50)
-		function clock()
-  		{
-  			var t=new Date()
-			document.getElementById("clock").value=t
-		}
-	</script>
-
+<script language=javascript>
+	var int=self.setInterval("clock()",50)
+	function clock()
+	  {
+		  var t=new Date()
+		  document.getElementById("clock").value=t
+		  
+	}
+</script>
 
 </html>
