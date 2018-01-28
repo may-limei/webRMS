@@ -640,11 +640,21 @@
 
 
 <script type="text/javascript">
+// 路径配置
+require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+
+
 	require([
 			'echarts',
+			'echarts/chart/bar' ,// 使用柱状图就加载bar模块，按需加载
+			'echarts/chart/line',
 			'echarts/chart/gauge',
-			 'echarts/component/legend',
-			 'echarts/component/tooltip'
+			'echarts/component/legend',
+			'echarts/component/tooltip'
 		], function (echarts) {
 
 			var chartLine = echarts.init(document.getElementById('realtimeLine'), null, {
@@ -684,7 +694,7 @@
         {
             type : 'value',
             axisLabel : {
-                formatter: '{value} °C'
+                formatter: '{value} mGy/h'
             }
         }
     ],
