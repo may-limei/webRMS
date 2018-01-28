@@ -633,7 +633,9 @@
 	function clock()
 	  {
 		  var t=new Date()
-		  document.getElementById("clock").value=t
+		  document.getElementById("clock").value=t.toUTCString();
+		  // toUTCString() 将当日的日期（根据 UTC）转换为字符串
+		  //toLocaleTimeString() 方法可根据本地时间把 Date 对象的时间部分转换为字符串，并返回结果
 		  
 	}
 </script>
