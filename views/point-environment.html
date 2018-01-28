@@ -300,6 +300,12 @@
 	<script src="assets/js/main.js"></script>
 
 
+	<script>
+		var serverIP="127.0.0.1"
+		var socket = io.connect(serverIP+':3031');
+	</script>
+
+
 	<script type="text/javascript">
 		/***-- 路径配置,后面其他图表的路径配置也在此处设置了，共用 --***/
 		require.config({
@@ -605,10 +611,17 @@
 				//chart.setOption(option);
 				var timeTicket = function () {};
 				clearInterval(timeTicket);
+			//	timeTicket = setInterval(function (){
+			//		socket.on('EVMN-GDRM:DoseRate004', function () {
+			//			option.series[0].data = [{value:4, name: 'mGy/h'}];
+  			//		});
+			//		chart.setOption(option,true);
+			//	},1000) 
+
 				timeTicket = setInterval(function (){
 					option.series[0].data = [{value:(Math.random()*100).toFixed(2)-0, name: 'mGy/h'}];
 					chart.setOption(option,true);
-				},1000) 
+				},1000)
 
 			},
 		);
