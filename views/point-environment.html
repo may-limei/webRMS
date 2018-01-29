@@ -643,6 +643,7 @@
 
 <script type="text/javascript">
 // 路径配置
+var dataLine=[4, 8, 15, 13, 12, 6, 10];
 require.config({
             paths: {
                 echarts: 'http://echarts.baidu.com/build/dist'
@@ -704,7 +705,7 @@ require.config({
         {
             name:'环境监测0',
             type:'line',
-			data:[4, 8, 15, 13, 12, 6, 10],
+			data:dataLine,
             markPoint : {
                 data : [
                     {type : 'max', name: '最大值'},
@@ -720,7 +721,22 @@ require.config({
     ]
 			};
 
-			chartLine.setOption(optionLine);
+			var timeTicketLine = function () {};
+				clearInterval(timeTicketLine);
+				timeTicketLine = setInterval(function (){
+					//optionLine.series[0].data = [{value:(Math.random()*100).toFixed(2)-0, name: 'mGy/h'}];
+					dataLine.shift();
+					dataLine.push(Math.round(Math.random()*10));
+    				chartLine.setOption({
+        				series: [{
+          		    	data: dataLine
+        				}]
+				});
+					chartLine.setOption(optionLine,true);
+				},2000)
+
+
+			//chartLine.setOption(optionLine);
 
 		},
 	);
