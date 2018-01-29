@@ -367,9 +367,6 @@
 						y: 'bottom',
 						x:'right',
 						data:['γ环境监测站','其他监测站'],
-					//	textStyle: {
-					//	color: '#3eff32'
-					//	},
 					},
 					series : [
 						{
@@ -510,6 +507,7 @@
 	<script src="assets/js/lib/esl2.js"></script>
 	<script src="assets/js/lib/dat.gui.min.js"></script>
 	<script type="text/javascript">
+	var nowrv0 = 40;
 		require([
                 'echarts',
                 'echarts/chart/gauge',
@@ -603,7 +601,7 @@
 									color: '#fff'
 								}
 							},
-							data:[{value: 40, name: 'mGy/h'}]
+							data:[{value: nowrv0, name: 'mGy/h'}]
 						}
 					]
 				};
@@ -619,7 +617,9 @@
 			//	},1000) 
 
 				timeTicket = setInterval(function (){
-					option.series[0].data = [{value:(Math.random()*100).toFixed(2)-0, name: 'mGy/h'}];
+					nowrv0=(Math.random()*100).toFixed(2)-0;
+					//option.series[0].data = [{value:(Math.random()*100).toFixed(2)-0, name: 'mGy/h'}];
+					option.series[0].data = [{value:nowrv0, name: 'mGy/h'}];
 					chart.setOption(option,true);
 				},1000)
 
@@ -724,9 +724,9 @@ require.config({
 			var timeTicketLine = function () {};
 				clearInterval(timeTicketLine);
 				timeTicketLine = setInterval(function (){
-					//optionLine.series[0].data = [{value:(Math.random()*100).toFixed(2)-0, name: 'mGy/h'}];
 					dataLine.shift();
-					dataLine.push(Math.round(Math.random()*10));
+					//dataLine.push(Math.round(Math.random()*10));
+					dataLine.push(nowrv0);
     				chartLine.setOption({
         				series: [{
           		    	data: dataLine
