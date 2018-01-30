@@ -35,37 +35,52 @@ console.log(pv8.pvName);
 console.log(pv9.pvName);
 
 
+var pvs={ai:[{pvname:"EVMN-GDRM:DoseRate001"},{pvname:"EVMN-GDRM:DoseRate002"},{pvname:"EVMN-GDRM:DoseRate003"},{pvname:"EVMN-GDRM:DoseRate004"},{pvname:"EVMN-GDRM:DoseRate005"}],
+         ao:[{pvname:"hanlfHost:ao1"}, {pvname:"hanlfHost:ao2"}, {pvname:"hanlfHost:ao3"}]
+        }
+
 server.listen(port,'0.0.0.0',function(){
   console.log("Express server listening on port " + app.get('port'));
 });
 
 io.on('connection', function (socket) {
 
-  pv8.on('value', function(data) {
-    console.log(pv8.pvName,data);
-    socket.emit(pv8.pvName, data);//事件名为pv8,pvName,发射data给页面（后端emit，前端on）
+connect_pvs(pvs.ai,function(err,results){
+      async.map(results,function(item,callback){
+        item.on("value", function(data) {
+        // console.log('Value:',item.pvName,data);
+        socket.emit(item.pvName, data);
+        // console.log(item.pvName+" value change socket evnet emit")
+        });  
+      })
   });
-  pv9.on('value', function(data) {
-    console.log(pv9.pvName,data);
-    socket.emit(pv9.pvName, data);
+
+  connect_pvs_SEVR(pvs.ai,function(err,results){
+      async.map(results,function(item,callback){
+        item.on("value", function(data) {
+        // console.log('Value:',item.pvName,data);
+        socket.emit(item.pvName, data);
+        // console.log(item.pvName+" severity change socket evnet emit")
+        });  
+      })
   });
 
 });
 
-val=pv8.connect(function(err) {
-if(pv8.state()){
-// console.log(pv9.state());
-pv8.monitor();
-console.log(pv8.pvName+" is connected");
-} 
-});
-val=pv9.connect(function(err) {
-if(pv9.state()){
-// console.log(pv9.state());
-pv9.monitor();
-console.log(pv9.pvName+" is connected");
-} 
-});
+// val=pv8.connect(function(err) {
+// if(pv8.state()){
+// // console.log(pv9.state());
+// pv8.monitor();
+// console.log(pv8.pvName+" is connected");
+// } 
+// });
+// val=pv9.connect(function(err) {
+// if(pv9.state()){
+// // console.log(pv9.state());
+// pv9.monitor();
+// console.log(pv9.pvName+" is connected");
+// } 
+// });
 
 
 
@@ -146,3 +161,34 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
+async= require('async');
+
+function connect_pvs(pvs,callback){
+    async.map(pvs, function(item, callback) {
+        // console.log(item.pvname+" is connect*");
+       var pv = new epics.Channel(item.pvname);
+       pv.connect(function(err) {
+       if(pv.state()){
+          pv.monitor()};
+          callback(null,pv);
+          console.log(item.pvname+" is connected*");
+      });
+    }, function(err,results){
+         callback(err,results); 
+  });
+};
+
+function connect_pvs_SEVR(pvs,callback){
+    async.map(pvs, function(item, callback) {
+        // console.log(item.pvname+" is connect*");
+       var pv = new epics.Channel(item.pvname+".SEVR");
+       pv.connect(function(err) {
+       if(pv.state()){
+          pv.monitor()};
+          callback(null,pv);
+          console.log(item.pvname+"alarm severity is monitored*");
+      });
+    }, function(err,results){
+         callback(err,results); 
+  });
+};
