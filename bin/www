@@ -28,14 +28,11 @@ var server = http.createServer(app);
 var io = require('socket.io')(server);
 
 var epics = require('epics');
-var pv8 = new epics.Channel('EVMN-GDRM:DoseRate003');
-var pv9 = new epics.Channel('EVMN-GDRM:DoseRate004');
-
-console.log(pv8.pvName);
-console.log(pv9.pvName);
 
 
-var pvs={ai:[{pvname:"EVMN-GDRM:DoseRate001"},{pvname:"EVMN-GDRM:DoseRate002"},{pvname:"EVMN-GDRM:DoseRate003"},{pvname:"EVMN-GDRM:DoseRate004"},{pvname:"EVMN-GDRM:DoseRate005"}],
+
+
+var pvs={ai:[{pvname:"EVMN-GDRM:DoseRate001"},{pvname:"EVMN-GDRM:DoseRate002"},{pvname:"EVMN-GDRM:DoseRate003"},{pvname:"EVMN-GDRM:DoseRate004"},{pvname:"EVMN-GDRM:DoseRate005"},{pvname:"ARMS-GDRM:GDoseRate001"}],
          ao:[{pvname:"hanlfHost:ao1"}, {pvname:"hanlfHost:ao2"}, {pvname:"hanlfHost:ao3"}]
         }
 

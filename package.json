@@ -6,16 +6,16 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "async": "^2.6.0",
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "ejs": "^2.5.7",
     "epics": "^0.0.8",
-    "express": "~4.15.2",
+    "express": "^4.15.5",
     "jade": "~1.11.0",
-    "morgan": "~1.8.1",
-    "serve-favicon": "~2.4.2",
-    "socket.io": "^2.0.4",
-    "async": "^2.6.0"
+    "morgan": "^1.8.2",
+    "serve-favicon": "^2.4.5",
+    "socket.io": "^2.0.4"
   }
 }

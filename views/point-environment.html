@@ -13,14 +13,37 @@
 		<link rel="stylesheet" href="assets/css/bootstrap3-3-7.min.css">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-
+		<script src="socket.io/socket.io.js"></script>
+		<script src="bower_components/async/dist/async.js"></script>
 		<!--echarts-->
+
 		<script src="assets/js/lib/esl.js"></script>
 		<script src="assets/js/lib/config.js"></script>
 		<script src="assets/js/lib/dat.gui.min.js"></script>
 		<script type="text/javascript" src="./assets/js/jquery-1.8.3.js"></script>
 		<script type="text/javascript" src="./assets/js/esl2.js"></script>
-	
+		<script>
+			var testio=0;
+				var serverIP="127.0.0.1";
+		// var socket = io.connect(serverIP+':9021');
+				var socket = io.connect(serverIP+':3031');
+				var pvs={ai:[{pvname:"EVMN-GDRM:DoseRate001"},{pvname:"EVMN-GDRM:DoseRate002"},{pvname:"EVMN-GDRM:DoseRate003"},{pvname:"EVMN-GDRM:DoseRate004"},{pvname:"EVMN-GDRM:DoseRate005"},{pvname:"ARMS-GDRM:GDoseRate001"}],
+         ao:[{pvname:"hanlfHost:ao1"}, {pvname:"hanlfHost:ao2"}, {pvname:"hanlfHost:ao3"}]
+        }
+		       async.map(pvs.ai,function(item,callback){
+        //   console.log(item.pvname);
+          socket.on(item.pvname, function (data) {
+			  testio=data;
+            if(document.getElementById(item.pvname)){
+             document.getElementById(item.pvname).innerHTML=data;
+            }
+               });
+               
+       }, function(err,results){
+         callback(err,results); 
+        //  console.log(results);
+       });
+		</script>
 
 	</head>
 	<body class="right-sidebar">	
@@ -70,7 +93,11 @@
 			
 			<!-- 折线图line -->
 				<div class="wrapper style1">
+					<hr>
+					<h1 id="ARMS-GDRM:GDoseRate001">未连接</h1>
+					<hr>
 					<div class="container">
+						
 						<div class="row 200%">
 							<div class="8u 12u(mobile)" id="content">
 								<ul id="myTab" class="nav nav-tabs">
@@ -420,9 +447,9 @@
 								}
 							},
 							data:[
-								{name: 'γ环境监测站1', value: 100, geoCoord:[805.126, 786.913]},
-								{name: 'γ环境监测站2', value: 200, geoCoord:[535.126, 496.913]},
-								{name: 'γ环境监测站3', value: 300, geoCoord:[250.126, 810.913]},
+								{name: 'γ环境监测站1', value: Math.round(testio*1000), geoCoord:[805.126, 786.913]},
+								{name: 'γ环境监测站2', value: Math.round(testio*1000), geoCoord:[535.126, 496.913]},
+								{name: 'γ环境监测站3', value: Math.round(testio*1000), geoCoord:[250.126, 810.913]},
 								{name: 'γ环境监测站4', value: 400, geoCoord:[960.126, 126.913]},
 								{name: 'γ环境监测站5', value: 500, geoCoord:[225.226, 266.913]}
 							],  
@@ -436,9 +463,9 @@
 									shadowBlur : 10
 								},
 								data : [
-									{name: 'γ环境监测站1', value: 100, geoCoord:[805.126, 786.913], itemStyle:{normal:{color:'lime'}}},
-									{name: 'γ环境监测站2', value: 200, geoCoord:[535.126, 496.913], itemStyle:{normal:{color:'lime'}}},
-									{name: 'γ环境监测站3', value: 300, geoCoord:[250.126, 810.913], itemStyle:{normal:{color:'lime'}}},
+									{name: 'γ环境监测站1', value: Math.round(testio*1000), geoCoord:[805.126, 786.913], itemStyle:{normal:{color:'lime'}}},
+									{name: 'γ环境监测站2', value: Math.round(testio*1000), geoCoord:[535.126, 496.913], itemStyle:{normal:{color:'lime'}}},
+									{name: 'γ环境监测站3', value: Math.round(testio*1000), geoCoord:[250.126, 810.913], itemStyle:{normal:{color:'lime'}}},
 									{name: 'γ环境监测站4', value: 400, geoCoord:[960.126, 126.913], itemStyle:{normal:{color:'lime'}}},
 									{name: 'γ环境监测站5', value: 500, geoCoord:[225.226, 266.913], itemStyle:{normal:{color:'lime'}}}
 								]
@@ -469,10 +496,10 @@
 								}
 							},
 							data:[
-								{name: '103楼', value: 100, geoCoord:[772, 243]},
-								{name: '104楼', value: 200, geoCoord:[813, 136]},
-								{name: '106楼', value: 300, geoCoord:[847, 64]},
-								{name: '109楼', value: 400, geoCoord:[106, 326]},
+								{name: '103楼', value: Math.round(testio*1000), geoCoord:[772, 243]},
+								{name: '104楼', value: Math.round(testio*1000), geoCoord:[813, 136]},
+								{name: '106楼', value: Math.round(testio*1000), geoCoord:[847, 64]},
+								{name: '109楼', value: Math.round(testio*1000), geoCoord:[106, 326]},
 								{name: '112楼', value: 500, geoCoord:[869, 394]},
 								{name: '115楼', value: 400, geoCoord:[558, 384]}
 							],  
@@ -600,7 +627,7 @@
 								shadowColor:'#999',//透明
 								shadowBlur:5,
 							},
-							data:[{value: nowrv0, name: 'mGy/h'}]
+							data:[{value: Math.round(testio*1000), name: 'mGy/h'}]
 						}
 					]
 				};
@@ -616,9 +643,9 @@
 			//	},1000) 
 
 				timeTicket = setInterval(function (){
-					nowrv0=(Math.random()*100).toFixed(2)-0;
+					//nowrv0=(Math.random()*100).toFixed(2)-0;
 					//option.series[0].data = [{value:(Math.random()*100).toFixed(2)-0, name: 'mGy/h'}];
-					option.series[0].data = [{value:nowrv0, name: 'mGy/h'}];
+					option.series[0].data = [{value:Math.round(testio*1000), name: 'mGy/h'}];
 					chart.setOption(option,true);
 				},1000)
 
