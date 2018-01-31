@@ -13,39 +13,8 @@
 		<link rel="stylesheet" href="assets/css/bootstrap3-3-7.min.css">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-		<script src="socket.io/socket.io.js"></script>
-		<script src="bower_components/async/dist/async.js"></script>
-		<!--echarts-->
-
-		<script src="assets/js/lib/esl.js"></script>
-		<script src="assets/js/lib/config.js"></script>
-		<script src="assets/js/lib/dat.gui.min.js"></script>
-		<script type="text/javascript" src="./assets/js/jquery-1.8.3.js"></script>
-		<script type="text/javascript" src="./assets/js/esl2.js"></script>
-		<script>
-			var testio=0;
-				var serverIP="127.0.0.1";
-		// var socket = io.connect(serverIP+':9021');
-				var socket = io.connect(serverIP+':3031');
-				var pvs={ai:[{pvname:"EVMN-GDRM:DoseRate001"},{pvname:"EVMN-GDRM:DoseRate002"},{pvname:"EVMN-GDRM:DoseRate003"},{pvname:"EVMN-GDRM:DoseRate004"},{pvname:"EVMN-GDRM:DoseRate005"},{pvname:"ARMS-GDRM:GDoseRate001"}],
-         ao:[{pvname:"hanlfHost:ao1"}, {pvname:"hanlfHost:ao2"}, {pvname:"hanlfHost:ao3"}]
-        }
-		       async.map(pvs.ai,function(item,callback){
-        //   console.log(item.pvname);
-          socket.on(item.pvname, function (data) {
-			  testio=data;
-            if(document.getElementById(item.pvname)){
-             document.getElementById(item.pvname).innerHTML=data;
-            }
-               });
-               
-       }, function(err,results){
-         callback(err,results); 
-        //  console.log(results);
-       });
-		</script>
-
 	</head>
+
 	<body class="right-sidebar">	
 		<div id="page-wrapper">
 
@@ -326,12 +295,58 @@
 	<script src="assets/js/bootstrap3-3-7.min.css"></script>
 	<script src="assets/js/main.js"></script>
 
+	<!--socket & epics-->
+	<script src="socket.io/socket.io.js"></script>
+	<script src="bower_components/async/dist/async.js"></script>
+	
+	<!--echarts-->
+	<script src="assets/js/lib/esl.js"></script>
+	<script src="assets/js/lib/config.js"></script>
+	<script src="assets/js/lib/dat.gui.min.js"></script>
+	<script type="text/javascript" src="./assets/js/jquery-1.8.3.js"></script>
+	<script type="text/javascript" src="./assets/js/esl2.js"></script>
 
 	<script>
-		var serverIP="127.0.0.1"
+		//socket & EPICS
+		//定义变量
+		var serverIP="127.0.0.1";
 		var socket = io.connect(serverIP+':3031');
-	</script>
 
+		var testio=0;
+
+		var pvs={
+			ai:[
+				{pvname:"EVMN-GDRM:DoseRate001"},
+				{pvname:"EVMN-GDRM:DoseRate002"},
+				{pvname:"EVMN-GDRM:DoseRate003"},
+				{pvname:"EVMN-GDRM:DoseRate004"},
+				{pvname:"EVMN-GDRM:DoseRate005"},
+				{pvname:"ARMS-GDRM:GDoseRate001"}
+			],
+	 		ao:[
+				 {pvname:"mayHost:ao1"}, 
+				 {pvname:"mayHost:ao2"}, 
+				 {pvname:"mayHost:ao3"}
+			]
+		};
+		var datapvi = new Array();	var ilen = datapvi.length;	var ii = 0;
+		var datapvo = new Array();	var olen = datapvo.length;	var oo = 0;
+
+		//遍历pvs.ai的各个元素。async保证每个pvs.ai.name事件都能执行回调函数的操作，而不是最后一个才执行
+		async.map(pvs.ai,function(item,callback){//map是遍历函数
+	  		socket.on(item.pvname, function (data) {
+	testio = data;
+			// if(document.getElementById(item.pvname)){
+		 	// 	document.getElementById(item.pvname).innerHTML=data;
+			// }
+			datapvi[ii]=data;
+		    });
+			if(ii<ilen){ii += 1;}else{ii = 0;}
+   		}, function(err,results){
+	 		callback(err,results); 
+   		});
+	</script>
+	
 
 	<script type="text/javascript">
 		/***-- 路径配置,后面其他图表的路径配置也在此处设置了，共用 --***/
