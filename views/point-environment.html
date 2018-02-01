@@ -13,6 +13,10 @@
 		<link rel="stylesheet" href="assets/css/bootstrap3-3-7.min.css">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+
+		<script>
+			//var windowHeight=screen.availHeight;
+		</script>
 	</head>
 
 	<body class="right-sidebar">	
@@ -56,17 +60,14 @@
 
 			<!-- 地图map -->
 				<div class="row">
-					<div id="svgarea" style="height:900px; width:100%; background:url(images/sinap-jiading.jpg)" class="12u">
+					<div class="6u 12u(mobile)" id="content">
+						<div id="sinapsvg" style="height:700px; width:100%; background:url(images/sinap-jiading.jpg)" class="12u"></div>
 					</div>
 				</div>
 			
 			<!-- 折线图line -->
 				<div class="wrapper style1">
-					<hr>
-					<h1 id="ARMS-GDRM:GDoseRate001">未连接</h1>
-					<hr>
 					<div class="container">
-						
 						<div class="row 200%">
 							<div class="8u 12u(mobile)" id="content">
 								<ul id="myTab" class="nav nav-tabs">
@@ -360,188 +361,189 @@
 			}
 		});
 		
-		// 使用
+		// 使用模块
 		require(
 			[
 				'echarts',
 				'echarts/chart/bar' ,// 使用柱状图就加载bar模块，按需加载
-				'echarts/chart/map' // 使用柱状图就加载map模块，按需加载
+				'echarts/chart/map'
 			],
-			function (ec) {
-				// 基于准备好的dom，初始化echarts图表
-				/***-- 自定义svg地图（名称取为sinap） --***/
-				require('echarts/util/mapData/params').params.sinap = {
-					getGeoJson: function (callback) {
-						$.ajax({
-							url: "images/sinap2.svg",
-							dataType: 'xml',
-							success: function (xml) {
-								callback(xml)
-							}
-						});
-					}
+
+		function (ec) {
+			/***-- 自定义svg地图（名称取为sinap） --***/
+			require('echarts/util/mapData/params').params.sinap = {
+				getGeoJson: function (callback) {
+					$.ajax({
+						url: "images/sinap2.svg",
+						dataType: 'xml',
+						success: function (xml) {
+							callback(xml)
+						}
+					});
 				}
+			}
 			
-				var myChart_svgarea = ec.init(document.getElementById('svgarea')); 
+			// 基于准备好的dom，初始化echarts图表
+			var chart_sinapsvg = ec.init(document.getElementById('sinapsvg')); 
 				
-				var option_svgarea = {
-					backgroundColor: '#fefefe',
-					color:[
-						'lime',
-						'#65c9ff'
-					],
-					tooltip: {
-						trigger: 'item',
-						formatter: function (v) {
-							return v[1]+'<br/>测量值为：'+v[2];
-						}
-					},
-					toolbox: {
-						show: true,
-						feature: {
-							dataView: { show: true, readOnly: true },
-							restore: { show: true },
-							saveAsImage: { show: true }
-						}
-					},
-					legend: {
-						orient: 'vertical',
-						y: 'bottom',
-						x:'right',
-						data:['γ环境监测站','其他监测站'],
-					},
-					series : [
-						{
-							name:'地图',
-					    	type: 'map',
-					    	mapType: 'sinap',
-					    	mapLabelColor: "#ffffff",
-						    roam:true,
-						    scaleLimit:{
-							    max: 1.5,
-							    min:0.5
-						    },
-						    itemStyle:{
+			//start option_sinapsvg
+			var option_sinapsvg = {
+				backgroundColor: '#fefefe',
+				color:[
+					'lime',
+					'#65c9ff'
+				],
+				tooltip: {
+					trigger: 'item',
+					formatter: function (v) {
+						return v[1]+'<br/>测量值为：'+v[2];
+					}
+				},
+				toolbox: {
+					show: true,
+					feature: {
+						dataView: { show: true, readOnly: true },
+						restore: { show: true },
+						saveAsImage: { show: true }
+					}
+				},
+				legend: {
+					orient: 'vertical',
+					y: 'bottom',
+					x:'right',
+					data:['γ环境监测站','其他监测站'],
+				},
+				series : [
+					{
+						name:'地图',
+					   	type: 'map',
+				    	mapType: 'sinap',
+				    	mapLabelColor: "#ffffff",
+					    roam:true,
+					    scaleLimit:{
+						    max: 1.5,
+						    min:0.5
+					    },
+					    itemStyle:{
 								normal:{
-									borderColor:'rgba(100,149,237)',
-									borderWidth:0.5,
-									areaColor: 'lime',
-									borderColor: '#111',
-									areaStyle:{
-										color: '#000000'
-							  		}
-								},
-								emphasis: {
-									areaColor: '#2a333d'
-								}
+								borderColor:'rgba(100,149,237)',
+								borderWidth:0.5,
+								areaColor: 'lime',
+								borderColor: '#111',
+								areaStyle:{
+									color: '#000000'
+						  		}
 							},
-							data:[]
-						},
-						{
-							name:'γ环境监测站',
-						    type: 'map',
-						    mapType: 'sinap',
-						    mapLabelColor: "#ffffff",
-						    roam:true,
-						    scaleLimit:{
-							    max: 1.5,
-							    min:0.5
-						    },
-						    itemStyle:{
-								normal:{
-									borderColor:'rgba(100,149,237)',
-									borderWidth:0.5,
-									areaColor: 'lime',
-									borderColor: '#111',
-									areaStyle:{
-										color: '#000000'
-							  		}
-								},
-								emphasis: {
-									areaColor: '#2a333d'
-								}
-							},
-							data:[
-								{name: 'γ环境监测站1', value: Math.round(testio*1000), geoCoord:[805.126, 786.913]},
-								{name: 'γ环境监测站2', value: Math.round(testio*1000), geoCoord:[535.126, 496.913]},
-								{name: 'γ环境监测站3', value: Math.round(testio*1000), geoCoord:[250.126, 810.913]},
-								{name: 'γ环境监测站4', value: 400, geoCoord:[960.126, 126.913]},
-								{name: 'γ环境监测站5', value: 500, geoCoord:[225.226, 266.913]}
-							],  
-							markPoint : {
-								symbol:'circle',
-								symbolSize : 20,
-								effect : {
-									show: true,
-									color: 'lime',
-									// shadowColor: '#F28B22',
-									shadowBlur : 10
-								},
-								data : [
-									{name: 'γ环境监测站1', value: Math.round(testio*1000), geoCoord:[805.126, 786.913], itemStyle:{normal:{color:'lime'}}},
-									{name: 'γ环境监测站2', value: Math.round(testio*1000), geoCoord:[535.126, 496.913], itemStyle:{normal:{color:'lime'}}},
-									{name: 'γ环境监测站3', value: Math.round(testio*1000), geoCoord:[250.126, 810.913], itemStyle:{normal:{color:'lime'}}},
-									{name: 'γ环境监测站4', value: 400, geoCoord:[960.126, 126.913], itemStyle:{normal:{color:'lime'}}},
-									{name: 'γ环境监测站5', value: 500, geoCoord:[225.226, 266.913], itemStyle:{normal:{color:'lime'}}}
-								]
-							},					  
-					  	},
-						{
-							name:'其他监测站',
-						    type: 'map',
-						    mapType: 'sinap',
-						    mapLabelColor: "#ffffff",
-						    roam:true,
-						    scaleLimit:{
-							    max: 1.5,
-							    min:0.5
-						    },
-						    itemStyle:{
-								normal:{
-									borderColor:'rgba(100,149,237)',
-									borderWidth:0.5,
-									areaColor: 'lime',
-									borderColor: '#111',
-									areaStyle:{
-										color: '#000000'
-							  		}
-								},
-								emphasis: {
-									areaColor: '#2a333d'
-								}
-							},
-							data:[
-								{name: '103楼', value: Math.round(testio*1000), geoCoord:[772, 243]},
-								{name: '104楼', value: Math.round(testio*1000), geoCoord:[813, 136]},
-								{name: '106楼', value: Math.round(testio*1000), geoCoord:[847, 64]},
-								{name: '109楼', value: Math.round(testio*1000), geoCoord:[106, 326]},
-								{name: '112楼', value: 500, geoCoord:[869, 394]},
-								{name: '115楼', value: 400, geoCoord:[558, 384]}
-							],  
-							markPoint : {
-								symbol:'pin',
-								symbolSize : 5,
-								effect : {
-									show: true,
-									color: '#65c9ff',
-									// shadowColor: '#F28B22',
-									shadowBlur : 1
-								},
-								data : [
-									{name: '103楼', value: 100, geoCoord:[772, 243], itemStyle:{normal:{color:'#65c9ff'}}},
-									{name: '104楼', value: 200, geoCoord:[813, 136], itemStyle:{normal:{color:'#65c9ff'}}},
-									{name: '106楼', value: 300, geoCoord:[847, 64], itemStyle:{normal:{color:'#65c9ff'}}},
-									{name: '109楼', value: 400, geoCoord:[106, 326], itemStyle:{normal:{color:'#65c9ff'}}},
-									{name: '112楼', value: 500, geoCoord:[869, 394], itemStyle:{normal:{color:'#65c9ff'}}},
-									{name: '115楼', value: 500, geoCoord:[558, 384], itemStyle:{normal:{color:'#65c9ff'}}}
-								]
+							emphasis: {
+								areaColor: '#2a333d'
 							}
 						},
-					]
-				};
+						data:[]
+					},
+					{
+						name:'γ环境监测站',
+					    type: 'map',
+					    mapType: 'sinap',
+					    mapLabelColor: "#ffffff",
+					    roam:true,
+					    scaleLimit:{
+						    max: 1.5,
+						    min:0.5
+					    },
+					    itemStyle:{
+							normal:{
+								borderColor:'rgba(100,149,237)',
+								borderWidth:0.5,
+								areaColor: 'lime',
+								borderColor: '#111',
+								areaStyle:{
+									color: '#000000'
+						  		}
+							},
+							emphasis: {
+								areaColor: '#2a333d'
+							}
+						},
+						data:[
+							{name: 'γ环境监测站1', value: Math.round(testio*1000), geoCoord:[805.126, 786.913]},
+							{name: 'γ环境监测站2', value: Math.round(testio*1000), geoCoord:[535.126, 496.913]},
+							{name: 'γ环境监测站3', value: Math.round(testio*1000), geoCoord:[250.126, 810.913]},
+							{name: 'γ环境监测站4', value: 400, geoCoord:[960.126, 126.913]},
+							{name: 'γ环境监测站5', value: 500, geoCoord:[225.226, 266.913]}
+						],  
+						markPoint : {
+							symbol:'circle',
+							symbolSize : 20,
+							effect : {
+								show: true,
+								color: 'lime',
+								shadowBlur : 10
+							},
+							data : [
+								{name: 'γ环境监测站1', value: Math.round(testio*1000), geoCoord:[805.126, 786.913], itemStyle:{normal:{color:'lime'}}},
+								{name: 'γ环境监测站2', value: Math.round(testio*1000), geoCoord:[535.126, 496.913], itemStyle:{normal:{color:'lime'}}},
+								{name: 'γ环境监测站3', value: Math.round(testio*1000), geoCoord:[250.126, 810.913], itemStyle:{normal:{color:'lime'}}},
+								{name: 'γ环境监测站4', value: 400, geoCoord:[960.126, 126.913], itemStyle:{normal:{color:'lime'}}},
+								{name: 'γ环境监测站5', value: 500, geoCoord:[225.226, 266.913], itemStyle:{normal:{color:'lime'}}}
+							]
+						},					  
+				  	},
+					{
+						name:'其他监测站',
+					    type: 'map',
+					    mapType: 'sinap',
+					    mapLabelColor: "#ffffff",
+					    roam:true,
+					    scaleLimit:{
+						    max: 1.5,
+						    min:0.5
+					    },
+					    itemStyle:{
+							normal:{
+								borderColor:'rgba(100,149,237)',
+								borderWidth:0.5,
+								areaColor: 'lime',
+								borderColor: '#111',
+								areaStyle:{
+									color: '#000000'
+						  		}
+							},
+							emphasis: {
+								areaColor: '#2a333d'
+							}
+						},
+						data:[
+							{name: '103楼', value: Math.round(testio*1000), geoCoord:[772, 243]},
+							{name: '104楼', value: Math.round(testio*1000), geoCoord:[813, 136]},
+							{name: '106楼', value: Math.round(testio*1000), geoCoord:[847, 64]},
+							{name: '109楼', value: Math.round(testio*1000), geoCoord:[106, 326]},
+							{name: '112楼', value: 500, geoCoord:[869, 394]},
+							{name: '115楼', value: 400, geoCoord:[558, 384]}
+						],  
+						markPoint : {
+							symbol:'pin',
+							symbolSize : 5,
+							effect : {
+							show: true,
+							color: '#65c9ff',
+								shadowBlur : 1
+							},
+							data : [
+								{name: '103楼', value: 100, geoCoord:[772, 243], itemStyle:{normal:{color:'#65c9ff'}}},
+								{name: '104楼', value: 200, geoCoord:[813, 136], itemStyle:{normal:{color:'#65c9ff'}}},
+								{name: '106楼', value: 300, geoCoord:[847, 64], itemStyle:{normal:{color:'#65c9ff'}}},
+								{name: '109楼', value: 400, geoCoord:[106, 326], itemStyle:{normal:{color:'#65c9ff'}}},
+								{name: '112楼', value: 500, geoCoord:[869, 394], itemStyle:{normal:{color:'#65c9ff'}}},
+								{name: '115楼', value: 500, geoCoord:[558, 384], itemStyle:{normal:{color:'#65c9ff'}}}
+							]
+						}
+					},
+				]
+			};//end of var option_sinapsvg
+
 
 				// 为echarts对象加载数据 
-				myChart_svgarea.setOption(option_svgarea); 
+				chart_sinapsvg.setOption(option_sinapsvg); 
 			},
 		);
 	</script>

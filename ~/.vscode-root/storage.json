@@ -2,10 +2,10 @@
     "openedPathsList": {
         "workspaces": [
             "/home/may/pro/webRMS",
-            "/home/may/pro/webRMS",
             "/home/may"
         ],
         "files": [
+            "/home/may/pro/webRMS/bin/www",
             "/home/may/pro/echart/echarts-git/gitecharts/echarts/test/dynamicData2.html",
             "/home/may/pro/webRMS/app.js"
         ]
