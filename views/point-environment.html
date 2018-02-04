@@ -286,7 +286,7 @@
 		});
 
 
-		var dataLine=[4, 8, 15, 13, 12, 6, 10, , , , , , , , ];		
+		var dataLine=[4, 8, 15, 13, 12, 6, 10, 1, 1, 1, 1, 1, 1, 1];		
 
 		require([
 			'echarts',
@@ -322,13 +322,20 @@
 					}
 				},
 				calculable : true,
-				xAxis : [
-				{
+				xAxis : {
 					type : 'category',
 					boundaryGap : false,
-					data : ['周一','周二','周三','周四','周五','周六','周日','1','2','3','4','5','6','7']
-				}
-				],
+					data : (function (){
+						var now = new Date();
+						var res = [];
+						var len = 15;
+						while (len--) {
+							res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+							now = new Date(now - 2000);
+						}
+						return res;
+					})()
+				},
 				yAxis : [
 				{
 					type : 'value',
@@ -455,6 +462,7 @@ testio = data;
 				dataLine.push(env1);
 				optionLine.series[0].data=dataLine;
 				optionLine.series[1].data=[{value:env1, name: 'nGy/h'}];
+				//optionLine.xAxis=(new Date()).toLocaleTimeString().replace(/^\D*/,'');
 				//chartLine.clear();
 				chartLine.setOption(optionLine,true);
 			},2000)
