@@ -60,82 +60,18 @@
 
 			<!-- 地图map -->
 			<div class="row">
-					<div class="9u 12u(mobile)" id="content">
-						<div id="realtimeLine" style="height:700px; width:100%;" class="12u"></div>
-					</div>
-					<div class="3u 12u(mobile)" id="content">
-						<div id="" style="height:700px; width:100%;" class="12u"></div>
-					</div>
+				<div class="9u 12u(mobile)" id="content">
+					<div id="realtimeLine" style="height:700px; width:100%;" class="12u"></div>
 				</div>
+				<div class="3u 12u(mobile)" id="content">
+					<div id="" style="height:700px; width:100%;" class="12u"></div>
+				</div>
+			</div>
 			<!-- 地图map -->
-				<div class="row">
-					<div class="8u 12u(mobile)" id="content">
-						<div id="sinapsvg" style="height:700px; width:100%;" class="12u"></div>
-					</div>
-					<div class="4u 12u(mobile)" id="content">
-						<div id="" style="height:700px; width:100%;" class="12u"></div>
-					</div>
-				</div>
-			
-			<!-- 折线图line -->
-				<div class="wrapper style1">
-					<div class="container">
-						<div class="row 200%">
-							<div class="8u 12u(mobile)" id="content">
-								<ul id="myTab" class="nav nav-tabs">
-									<li class="active">
-										<a href="#gaugedata" data-toggle="tab">
-											实时数据
-										</a>
-									</li>
-									<li>
-										<a href="#historical-data" data-toggle="tab">
-											历史数据
-										</a>
-									</li>
-								</ul>
-
-								<div id="myTabContent" class="tab-content">
-									<div class="tab-pane fade in active">
-										<div id="gaugedata" style="height:400px; width:100%" ></div>
-									</div>
-									<div id="historical-data" style="height:800px; width:100%" class="tab-pane fade">
-										<p>test historical-data div</p>
-										<p>test historical-data div</p>
-										<p>test historical-data div</p>
-									</div>
-								</div>
-							</div>
-							<div class="4u 12u(mobile)" id="sidebar">
-								<hr class="first" />
-								<section>
-									<header>
-										<h3><a href="#">Accumsan sed penatibus</a></h3>
-									</header>
-									<input type="text" id="clock" size="35">
-									<p>
-										Dolor sed fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-										porttitor phasellus tempus cubilia ultrices tempor sagittis  tellus ante diam nec penatibus dolor cras
-										magna tempus feugiat veroeros.
-									</p>
-								</section>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			<!-- Banner -->
-				<section id="banner">
-					<header class="container special">
-						<h2 style="font-size:2.5em"> <strong >辐射防护在线监测系统</strong> - 嘉定园区</h2>
-						<p style="font-size:1.1em; text-align: left; text-indent:2em">
-							在嘉定园区内设置5个环境γ监测点，通过有线网络通讯方式将实时监测数据传送至环境监测中心的环境γ监测计算机。
-							计算机可以显示各个监测点的实时数据，可以存储、回调历史数据，以及生成、打印各种报表。
-							该计算机还能实现二次联网功能，将关键的实时数据传送至应急指挥中心的专用终端，在专用终端上可以查看各个监测点的时是数据和报警状态。
-						</p>
-					</header>
-				</section>
-
+			<div class="wrapper style1">
+				<div id="sinapsvg" style="height:700px; width:100%;" class="12u"></div>
+			</div>
+	
 			<!-- Footer -->
             <div id="footer">
 				<div class="container">
@@ -325,6 +261,7 @@
 		var socket = io.connect(serverIP+':3031');
 
 		var testio=0;
+		var env1=0;
 
 		var pvs={
 			ai:[
@@ -529,8 +466,11 @@ testio = data;
 			clearInterval(timeTicketLine);
 			timeTicketLine= setInterval(function(){
 				dataLine.shift();
-				dataLine.push((Math.random()*100).toFixed(2)-0);
-				chartLine.clear();
+				env1=(Math.random()*100).toFixed(2)-0;
+				dataLine.push(env1);
+				optionLine.series[0].data=dataLine;
+				optionLine.series[1].data=[{value:env1, name: 'nGy/h'}];
+				//chartLine.clear();
 				chartLine.setOption(optionLine,true);
 			},2000)
 
@@ -565,18 +505,7 @@ testio = data;
 
 
 	<!-- start of sinapsvg -->
-	<script type="text/javascript">
-		/***-- 路径配置,后面其他图表的路径配置也在此处设置了，共用 --***/
-		require.config({
-			paths: {
-				'echarts': 'assets/js/echarts/echarts',
-				'echarts/chart/line': 'assets/js/echarts/chart/line',
-				'echarts/chart/bar': 'assets/js/echarts/chart/bar',
-				'echarts/chart/map': 'assets/js/echarts/chart/map',
-				'echarts/chart/gauge': 'assets/js/echarts/chart/gauge'
-			}
-		});
-		
+	<script type="text/javascript">	
 		// 使用模块
 		require(
 			[
@@ -730,144 +659,11 @@ testio = data;
 
 				// 为echarts对象加载数据 
 				chart_sinapsvg.setOption(option_sinapsvg); 
+				var nowrv0 = 40;
 			},
 		);
 	</script><!-- start of sinapsvg -->
 
-	<script src="assets/js/lib/esl2.js"></script>
-	<script src="assets/js/lib/dat.gui.min.js"></script>
-	<script type="text/javascript">
-	var nowrv0 = 40;
-		require([
-                'echarts',
-                'echarts/chart/gauge',
-                 'echarts/component/legend',
-                 'echarts/component/tooltip'
-            ], function (echarts) {
-
-                var chart = echarts.init(document.getElementById('gaugedata'), null, {
-
-                });
-
-                var option = {
-					tooltip : {
-						formatter: "{a} <br/>{c} {b}"
-					},
-					toolbox: {
-						show : true,
-						feature : {
-							mark : {show: true},
-							restore : {show: true},
-							saveAsImage : {show: true}
-						}
-					},
-					series : [
-						{
-							name:'环境0',
-							type:'gauge',
-							radius: [0,'60%'],
-							min:0,
-							max:100,
-							splitNumber:10,
-							axisLine: {            // 坐标轴线
-								shadowColor:'#999',//透明
-								shadowBlur:5,
-								lineStyle: {       // 属性lineStyle控制线条样式
-									color: [[0.2, '#228b22'],[0.8, '#48b'],[1, '#ff4500']], 
-									width: 6
-								}
-							},
-							axisTick: {            // 坐标轴小标记
-								splitNumber: 10,   // 每份split细分多少段
-								length :10,        // 属性length控制线长
-								shadowColor:'#999',//透明
-								shadowBlur:5,
-								lineStyle: {       // 属性lineStyle控制线条样式
-									color: 'auto'
-								}
-							},
-							axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
-								shadowColor:'#999',//透明
-								shadowBlur:5,
-								textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-									color: 'auto',
-									fontSize:14
-								}
-							},
-							splitLine: {           // 分隔线
-								show: true,        // 默认显示，属性show控制显示与否
-								length :15,         // 属性length控制线长
-								shadowColor:'#999',//透明
-								shadowBlur:5,
-								lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
-									color: 'auto'
-								}
-							},
-							pointer : {
-								width : 5,
-								shadowColor:'#999',//透明
-								shadowBlur:5,
-							},
-							title : {
-								show : true,
-								offsetCenter: [0, '-37%'],       // x, y，单位px
-								textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-									fontWeight: 'bold',
-									fontSize:18
-								}
-							},
-							detail : {
-								formatter:'{value}',
-								height:40,
-								width:90,
-								backgroundColor:'rgba(10,10,10,1)',
-								offsetCenter: [-3,'40%'],
-								textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-									color: 'auto',
-									fontWeight: 'bolder',
-									fontSize: 28
-								},
-								shadowColor:'#999',//透明
-								shadowBlur:5,
-							},
-							data:[{value: Math.round(testio*1000), name: 'mGy/h'}]
-						}
-					]
-				};
-
-				//chart.setOption(option);
-				var timeTicket = function () {};
-				clearInterval(timeTicket);
-			//	timeTicket = setInterval(function (data){
-			//		socket.on('EVMN-GDRM:DoseRate004', function () {
-			//			option.series[0].data = [{value:data, name: 'mGy/h'}];
-  			//		});
-			//		chart.setOption(option,true);
-			//	},1000) 
-
-				timeTicket = setInterval(function (){
-					//nowrv0=(Math.random()*100).toFixed(2)-0;
-					//option.series[0].data = [{value:(Math.random()*100).toFixed(2)-0, name: 'mGy/h'}];
-					option.series[0].data = [{value:Math.round(testio*1000), name: 'mGy/h'}];
-					chart.setOption(option,true);
-				},1000)
-
-			},
-		);
-				
-	</script>
-
-<script language=javascript>
-	var int=self.setInterval("clock()",50)
-	function clock()
-	  {
-		  var t=new Date()
-		  document.getElementById("clock").value=t.toUTCString();
-		  // toUTCString() 将当日的日期（根据 UTC）转换为字符串
-		  //toLocaleTimeString() 方法可根据本地时间把 Date 对象的时间部分转换为字符串，并返回结果
-		  
-	}
-</script>
 
 
 </html>
