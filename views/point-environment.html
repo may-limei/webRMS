@@ -17,6 +17,44 @@
 		<script>
 			//var windowHeight=screen.availHeight;
 		</script>
+
+		<!--socket & epics-->
+		<script src="socket.io/socket.io.js"></script>
+		<script src="bower_components/async/dist/async.js"></script>
+		
+		<!--echarts-->
+		<script type="text/javascript" src="./assets/js/esl2.js"></script>
+		<script src="assets/js/bootstrap3-3-7.min.js"></script>
+
+		<script>
+			//socket & EPICS
+			//定义变量
+			var serverIP="127.0.0.1";
+			var socket = io.connect(serverIP+':3031');
+
+			var testio=0;
+			var env1=0;
+
+			var pvs={
+				ai:[
+					{pvname:"EVMN-GDRM:DoseRate001"},
+					{pvname:"EVMN-GDRM:DoseRate002"},
+					{pvname:"EVMN-GDRM:DoseRate003"},
+					{pvname:"EVMN-GDRM:DoseRate004"},
+					{pvname:"EVMN-GDRM:DoseRate005"},
+					{pvname:"ARMS-GDRM:GDoseRate001"}
+				],
+				ao:[
+					{pvname:"mayHost:ao1"}, 
+					{pvname:"mayHost:ao2"}, 
+					{pvname:"mayHost:ao3"}
+				]
+			};
+			var datapvi = new Array();	var ilen = datapvi.length;	var ii = 0;
+			var datapvo = new Array();	var olen = datapvo.length;	var oo = 0;
+
+		</script>
+		
 	</head>
 
 	<body class="right-sidebar">	
@@ -231,58 +269,8 @@
 		</div>
 	</body>
 
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.dropotron.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/jquery.onvisible.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-	<script src="assets/js/bootstrap3-3-7.min.js"></script>
-	<script src="assets/js/bootstrap3-3-7.min.css"></script>
-	<script src="assets/js/main.js"></script>
 
-	<!--socket & epics-->
-	<script src="socket.io/socket.io.js"></script>
-	<script src="bower_components/async/dist/async.js"></script>
-	
-	<!--echarts-->
-	<script src="assets/js/lib/esl.js"></script>
-	<script src="assets/js/lib/config.js"></script>
-	<script src="assets/js/lib/dat.gui.min.js"></script>
-	<script type="text/javascript" src="./assets/js/jquery-1.8.3.js"></script>
-	<script type="text/javascript" src="./assets/js/esl2.js"></script>
 
-	<script>
-		//socket & EPICS
-		//定义变量
-		var serverIP="127.0.0.1";
-		var socket = io.connect(serverIP+':3031');
-
-		var testio=0;
-		var env1=0;
-
-		var pvs={
-			ai:[
-				{pvname:"EVMN-GDRM:DoseRate001"},
-				{pvname:"EVMN-GDRM:DoseRate002"},
-				{pvname:"EVMN-GDRM:DoseRate003"},
-				{pvname:"EVMN-GDRM:DoseRate004"},
-				{pvname:"EVMN-GDRM:DoseRate005"},
-				{pvname:"ARMS-GDRM:GDoseRate001"}
-			],
-	 		ao:[
-				 {pvname:"mayHost:ao1"}, 
-				 {pvname:"mayHost:ao2"}, 
-				 {pvname:"mayHost:ao3"}
-			]
-		};
-		var datapvi = new Array();	var ilen = datapvi.length;	var ii = 0;
-		var datapvo = new Array();	var olen = datapvo.length;	var oo = 0;
-
-	</script>
-	
 
 	<!-- start of line -->
 	<script type="text/javascript">
@@ -302,11 +290,8 @@
 
 		require([
 			'echarts',
-			'echarts/chart/bar' ,// 使用柱状图就加载bar模块，按需加载
 			'echarts/chart/line',
 			'echarts/chart/gauge',
-			'echarts/component/legend',
-			'echarts/component/tooltip'
 		], function (echarts) {//start of function(echarts)
 
 			var chartLine = echarts.init(document.getElementById('realtimeLine'), null, {});
@@ -664,6 +649,15 @@ testio = data;
 		);
 	</script><!-- start of sinapsvg -->
 
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.dropotron.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.onvisible.min.js"></script>
+	<!-- script src="assets/js/skel.min.js"></script-->
+	<script src="assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 
+	<script src="assets/js/main.js"></script>
 
 </html>
