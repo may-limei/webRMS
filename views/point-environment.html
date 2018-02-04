@@ -59,9 +59,21 @@
 				</div>
 
 			<!-- 地图map -->
+			<div class="row">
+					<div class="9u 12u(mobile)" id="content">
+						<div id="realtimeLine" style="height:700px; width:100%;" class="12u"></div>
+					</div>
+					<div class="3u 12u(mobile)" id="content">
+						<div id="" style="height:700px; width:100%;" class="12u"></div>
+					</div>
+				</div>
+			<!-- 地图map -->
 				<div class="row">
-					<div class="6u 12u(mobile)" id="content">
-						<div id="sinapsvg" style="height:700px; width:100%; background:url(images/sinap-jiading.jpg)" class="12u"></div>
+					<div class="8u 12u(mobile)" id="content">
+						<div id="sinapsvg" style="height:700px; width:100%;" class="12u"></div>
+					</div>
+					<div class="4u 12u(mobile)" id="content">
+						<div id="" style="height:700px; width:100%;" class="12u"></div>
 					</div>
 				</div>
 			
@@ -86,7 +98,6 @@
 								<div id="myTabContent" class="tab-content">
 									<div class="tab-pane fade in active">
 										<div id="gaugedata" style="height:400px; width:100%" ></div>
-										<div id="realtimeLine" style="height:400px; width:100%"></div>
 									</div>
 									<div id="historical-data" style="height:800px; width:100%" class="tab-pane fade">
 										<p>test historical-data div</p>
@@ -333,22 +344,227 @@
 		var datapvi = new Array();	var ilen = datapvi.length;	var ii = 0;
 		var datapvo = new Array();	var olen = datapvo.length;	var oo = 0;
 
-		//遍历pvs.ai的各个元素。async保证每个pvs.ai.name事件都能执行回调函数的操作，而不是最后一个才执行
-		async.map(pvs.ai,function(item,callback){//map是遍历函数
-	  		socket.on(item.pvname, function (data) {
-	testio = data;
-			// if(document.getElementById(item.pvname)){
-		 	// 	document.getElementById(item.pvname).innerHTML=data;
-			// }
-			datapvi[ii]=data;
-		    });
-			if(ii<ilen){ii += 1;}else{ii = 0;}
-   		}, function(err,results){
-	 		callback(err,results); 
-   		});
 	</script>
 	
 
+	<!-- start of line -->
+	<script type="text/javascript">
+		// 路径配置
+		require.config({
+			paths: {
+				'echarts': 'assets/js/echarts/echarts',
+				'echarts/chart/line': 'assets/js/echarts/chart/line',
+				'echarts/chart/bar': 'assets/js/echarts/chart/bar',
+				'echarts/chart/map': 'assets/js/echarts/chart/map',
+				'echarts/chart/gauge': 'assets/js/echarts/chart/gauge'
+			}
+		});
+
+
+		var dataLine=[4, 8, 15, 13, 12, 6, 10, , , , , , , , ];		
+
+		require([
+			'echarts',
+			'echarts/chart/bar' ,// 使用柱状图就加载bar模块，按需加载
+			'echarts/chart/line',
+			'echarts/chart/gauge',
+			'echarts/component/legend',
+			'echarts/component/tooltip'
+		], function (echarts) {//start of function(echarts)
+
+			var chartLine = echarts.init(document.getElementById('realtimeLine'), null, {});
+
+			var optionLine = {//start of optionLine
+				//backgroundColor: '#303030',
+				title : {
+					text: '环境监测Gamma剂量率报表',
+					//subtext: '环境监测',
+					left:'1%',
+					top:'6%'
+				},
+				tooltip : {
+					trigger: 'axis'
+				},
+				legend: {
+					data:['环境监测1','环境监测2','环境监测3','环境监测4','环境监测5']
+				},
+				grid:{
+					x2: '30%',
+				},
+				toolbox: {
+					show : true,
+					feature : {
+						dataView : {show: true, readOnly: false},
+						restore : {show: true},
+						saveAsImage : {show: true}
+					}
+				},
+				calculable : true,
+				xAxis : [
+				{
+					type : 'category',
+					boundaryGap : false,
+					data : ['周一','周二','周三','周四','周五','周六','周日','1','2','3','4','5','6','7']
+				}
+				],
+				yAxis : [
+				{
+					type : 'value',
+					axisLabel : {
+						formatter: '{value} mGy/h'
+					}
+				}
+				],
+				series : [
+				{
+					name:'环境监测1',
+					type:'line',
+					data:dataLine,
+					markPoint : {
+						data : [
+							{type : 'max', name: '最大值'},
+							{type : 'min', name: '最小值'}
+						]
+					},
+					markLine : {
+						data : [
+							{type : 'average', name: '平均值'}
+						]
+					}
+				},
+				{
+					name:'环境1',
+					type:'gauge',
+					center:['83%','33%'],
+					radius:['25%','30%'],
+					min:0,
+					max:100,
+					splitNumber:10,
+					axisLine: {            // 坐标轴线
+						shadowColor:'#999',//透明
+						shadowBlur:5,
+						lineStyle: {       // 属性lineStyle控制线条样式
+							color: [[0.2, '#228b22'],[0.8, '#48b'],[1, '#ff4500']], 
+							width: 6
+						}
+					},
+					axisTick: {            // 坐标轴小标记
+						splitNumber: 10,   // 每份split细分多少段
+						length :10,        // 属性length控制线长
+						shadowColor:'#999',//透明
+						shadowBlur:5,
+						lineStyle: {       // 属性lineStyle控制线条样式
+							color: 'auto'
+						}
+					},
+					axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
+						shadowColor:'#999',//透明
+						shadowBlur:5,
+						textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+							color: 'auto',
+							fontSize:14
+						}
+					},
+					splitLine: {           // 分隔线
+						show: true,        // 默认显示，属性show控制显示与否
+						length :15,         // 属性length控制线长
+						shadowColor:'#999',//透明
+						shadowBlur:5,
+						lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+							color: 'auto'
+						}
+					},
+					pointer : {
+						width : 5,
+						shadowColor:'#999',//透明
+						shadowBlur:5,
+					},
+					title : {
+						show : true,
+						offsetCenter: [0, '-37%'],       // x, y，单位px
+						textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+							fontWeight: 'bold',
+							fontSize:18
+						}
+					},
+					detail : {
+						formatter:'{value}',
+						height:40,
+						width:90,
+						backgroundColor:'rgba(10,10,10,1)',
+						offsetCenter: [-3,'40%'],
+						textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+							color: 'auto',
+							fontWeight: 'bolder',
+							fontSize: 28
+						},
+						shadowColor:'#999',//透明
+						shadowBlur:5,
+					},
+					data:[{value: (Math.random()*100).toFixed(2)-0, name: 'nGy/h'}]
+				}
+				]
+			};
+
+			//遍历pvs.ai的各个元素。async保证每个pvs.ai.name事件都能执行回调函数的操作，而不是最后一个才执行
+			async.map(pvs.ai,function(item,callback){//map是遍历函数
+	  			socket.on(item.pvname, function (data) {
+testio = data;
+				// if(document.getElementById(item.pvname)){
+		 		// 	document.getElementById(item.pvname).innerHTML=data;
+				// }
+				datapvi[ii]=data;
+				// chartLine.clear();
+				// chartLine.setOption(optionLine,true); 
+		    	});
+				if(ii<ilen){ii += 1;}else{ii = 0;}
+   			}, function(err,results){
+	 			callback(err,results); 
+   			});
+
+			// chartLine.clear();
+			// chartLine.setOption(optionLine,true);  
+
+			var timeTicketLine=function(){};
+			clearInterval(timeTicketLine);
+			timeTicketLine= setInterval(function(){
+				dataLine.shift();
+				dataLine.push((Math.random()*100).toFixed(2)-0);
+				chartLine.clear();
+				chartLine.setOption(optionLine,true);
+			},2000)
+
+			dataLine.shift();
+			dataLine.push(100);
+			dataLine.shift();
+			dataLine.push(67);
+		
+					//var timeTicketLine = function () {};
+					// clearInterval(timeTicketLine);
+					// timeTicketLine = setInterval(function (){
+					// 	nowrv0=(Math.random()*100).toFixed(2)-0;
+					// 	dataLine.shift();
+					// 	dataLine.push(nowrv0);
+					// 	chartLine.setOption({
+					// 		series: [
+					// 			{
+					// 				  data: [{value:nowrv0, name: 'mGy/h'}] 
+					// 			},
+					// 			{
+					// 				data: dataLine
+					// 			}
+					// 		]
+					// 	});
+					// 	chartLine.setOption(optionLine,true);
+					// },2000)
+		
+		},//end of function (echarts)
+	);
+					
+	</script><!-- end of line -->
+
+
+	<!-- start of sinapsvg -->
 	<script type="text/javascript">
 		/***-- 路径配置,后面其他图表的路径配置也在此处设置了，共用 --***/
 		require.config({
@@ -414,139 +630,109 @@
 					data:['γ环境监测站','其他监测站'],
 				},
 				series : [
-					{
-						name:'地图',
-					   	type: 'map',
-				    	mapType: 'sinap',
-				    	mapLabelColor: "#ffffff",
-					    roam:true,
-					    scaleLimit:{
-						    max: 1.5,
-						    min:0.5
-					    },
-					    itemStyle:{
-								normal:{
-								borderColor:'rgba(100,149,237)',
-								borderWidth:0.5,
-								areaColor: 'lime',
-								borderColor: '#111',
-								areaStyle:{
-									color: '#000000'
-						  		}
-							},
-							emphasis: {
-								areaColor: '#2a333d'
-							}
+				{
+					name:'γ环境监测站',
+				    type: 'map',
+				    mapType: 'sinap',
+				    mapLabelColor: "#ffffff",
+				    roam:false,
+				    itemStyle:{
+						normal:{
+							borderColor:'rgba(100,149,237)',
+							borderWidth:0.5,
+							areaColor: 'lime',
+							borderColor: '#111',
+							areaStyle:{
+								color: '#000000'
+					  		}
 						},
-						data:[]
-					},
-					{
-						name:'γ环境监测站',
-					    type: 'map',
-					    mapType: 'sinap',
-					    mapLabelColor: "#ffffff",
-					    roam:true,
-					    scaleLimit:{
-						    max: 1.5,
-						    min:0.5
-					    },
-					    itemStyle:{
-							normal:{
-								borderColor:'rgba(100,149,237)',
-								borderWidth:0.5,
-								areaColor: 'lime',
-								borderColor: '#111',
-								areaStyle:{
-									color: '#000000'
-						  		}
-							},
-							emphasis: {
-								areaColor: '#2a333d'
-							}
-						},
-						data:[
-							{name: 'γ环境监测站1', value: Math.round(testio*1000), geoCoord:[805.126, 786.913]},
-							{name: 'γ环境监测站2', value: Math.round(testio*1000), geoCoord:[535.126, 496.913]},
-							{name: 'γ环境监测站3', value: Math.round(testio*1000), geoCoord:[250.126, 810.913]},
-							{name: 'γ环境监测站4', value: 400, geoCoord:[960.126, 126.913]},
-							{name: 'γ环境监测站5', value: 500, geoCoord:[225.226, 266.913]}
-						],  
-						markPoint : {
-							symbol:'circle',
-							symbolSize : 20,
-							effect : {
-								show: true,
-								color: 'lime',
-								shadowBlur : 10
-							},
-							data : [
-								{name: 'γ环境监测站1', value: Math.round(testio*1000), geoCoord:[805.126, 786.913], itemStyle:{normal:{color:'lime'}}},
-								{name: 'γ环境监测站2', value: Math.round(testio*1000), geoCoord:[535.126, 496.913], itemStyle:{normal:{color:'lime'}}},
-								{name: 'γ环境监测站3', value: Math.round(testio*1000), geoCoord:[250.126, 810.913], itemStyle:{normal:{color:'lime'}}},
-								{name: 'γ环境监测站4', value: 400, geoCoord:[960.126, 126.913], itemStyle:{normal:{color:'lime'}}},
-								{name: 'γ环境监测站5', value: 500, geoCoord:[225.226, 266.913], itemStyle:{normal:{color:'lime'}}}
-							]
-						},					  
-				  	},
-					{
-						name:'其他监测站',
-					    type: 'map',
-					    mapType: 'sinap',
-					    mapLabelColor: "#ffffff",
-					    roam:true,
-					    scaleLimit:{
-						    max: 1.5,
-						    min:0.5
-					    },
-					    itemStyle:{
-							normal:{
-								borderColor:'rgba(100,149,237)',
-								borderWidth:0.5,
-								areaColor: 'lime',
-								borderColor: '#111',
-								areaStyle:{
-									color: '#000000'
-						  		}
-							},
-							emphasis: {
-								areaColor: '#2a333d'
-							}
-						},
-						data:[
-							{name: '103楼', value: Math.round(testio*1000), geoCoord:[772, 243]},
-							{name: '104楼', value: Math.round(testio*1000), geoCoord:[813, 136]},
-							{name: '106楼', value: Math.round(testio*1000), geoCoord:[847, 64]},
-							{name: '109楼', value: Math.round(testio*1000), geoCoord:[106, 326]},
-							{name: '112楼', value: 500, geoCoord:[869, 394]},
-							{name: '115楼', value: 400, geoCoord:[558, 384]}
-						],  
-						markPoint : {
-							symbol:'pin',
-							symbolSize : 5,
-							effect : {
-							show: true,
-							color: '#65c9ff',
-								shadowBlur : 1
-							},
-							data : [
-								{name: '103楼', value: 100, geoCoord:[772, 243], itemStyle:{normal:{color:'#65c9ff'}}},
-								{name: '104楼', value: 200, geoCoord:[813, 136], itemStyle:{normal:{color:'#65c9ff'}}},
-								{name: '106楼', value: 300, geoCoord:[847, 64], itemStyle:{normal:{color:'#65c9ff'}}},
-								{name: '109楼', value: 400, geoCoord:[106, 326], itemStyle:{normal:{color:'#65c9ff'}}},
-								{name: '112楼', value: 500, geoCoord:[869, 394], itemStyle:{normal:{color:'#65c9ff'}}},
-								{name: '115楼', value: 500, geoCoord:[558, 384], itemStyle:{normal:{color:'#65c9ff'}}}
-							]
+						emphasis: {
+							areaColor: '#2a333d'
 						}
 					},
-				]
-			};//end of var option_sinapsvg
+					data:[
+						{name: 'γ环境监测站1', value: Math.round(testio*1000), geoCoord:[805.126, 786.913]},
+						{name: 'γ环境监测站2', value: Math.round(testio*1000), geoCoord:[535.126, 496.913]},
+						{name: 'γ环境监测站3', value: Math.round(testio*1000), geoCoord:[250.126, 810.913]},
+						{name: 'γ环境监测站4', value: 400, geoCoord:[960.126, 126.913]},
+							{name: 'γ环境监测站5', value: 500, geoCoord:[225.226, 266.913]}
+					],  
+					markPoint : {
+						symbol:'circle',
+						symbolSize : 20,
+						effect : {
+							show: true,
+							color: 'lime',
+								shadowBlur : 10
+						},
+						data : [
+							{name: 'γ环境监测站1', value: Math.round(testio*1000), geoCoord:[805.126, 786.913], itemStyle:{normal:{color:'lime'}}},
+							{name: 'γ环境监测站2', value: Math.round(testio*1000), geoCoord:[535.126, 496.913], itemStyle:{normal:{color:'lime'}}},
+							{name: 'γ环境监测站3', value: Math.round(testio*1000), geoCoord:[250.126, 810.913], itemStyle:{normal:{color:'lime'}}},
+							{name: 'γ环境监测站4', value: 400, geoCoord:[960.126, 126.913], itemStyle:{normal:{color:'lime'}}},
+							{name: 'γ环境监测站5', value: 500, geoCoord:[225.226, 266.913], itemStyle:{normal:{color:'lime'}}}
+						]
+					},					  
+				},
+				{
+					name:'其他监测站',
+				    type: 'map',
+				    mapType: 'sinap',
+				    mapLabelColor: "#ffffff",
+				    roam:true,
+				    scaleLimit:{
+					    max: 1.5,
+					    min:0.5
+				    },
+				    itemStyle:{
+						normal:{
+							borderColor:'rgba(100,149,237)',
+							borderWidth:0.5,
+							areaColor: 'lime',
+							borderColor: '#111',
+							areaStyle:{
+								color: '#000000'
+					 		}
+						},
+						emphasis: {
+							areaColor: '#2a333d'
+						}
+					},
+					data:[
+						{name: '103楼', value: Math.round(testio*1000), geoCoord:[772, 243]},
+						{name: '104楼', value: Math.round(testio*1000), geoCoord:[813, 136]},
+						{name: '106楼', value: Math.round(testio*1000), geoCoord:[847, 64]},
+						{name: '109楼', value: Math.round(testio*1000), geoCoord:[106, 326]},
+						{name: '112楼', value: 500, geoCoord:[869, 394]},
+						{name: '115楼', value: 400, geoCoord:[558, 384]}
+					],  
+					markPoint : {
+						symbol:'pin',
+						symbolSize : 5,
+						effect : {
+						show: true,
+						color: '#65c9ff',
+							shadowBlur : 1
+						},
+						data : [
+							{name: '103楼', value: 100, geoCoord:[772, 243], itemStyle:{normal:{color:'#65c9ff'}}},
+							{name: '104楼', value: 200, geoCoord:[813, 136], itemStyle:{normal:{color:'#65c9ff'}}},
+							{name: '106楼', value: 300, geoCoord:[847, 64], itemStyle:{normal:{color:'#65c9ff'}}},
+							{name: '109楼', value: 400, geoCoord:[106, 326], itemStyle:{normal:{color:'#65c9ff'}}},
+							{name: '112楼', value: 500, geoCoord:[869, 394], itemStyle:{normal:{color:'#65c9ff'}}},
+							{name: '115楼', value: 500, geoCoord:[558, 384], itemStyle:{normal:{color:'#65c9ff'}}}
+						]
+					}
+				},
+			]
+		};//end of var option_sinapsvg
 
 
 				// 为echarts对象加载数据 
 				chart_sinapsvg.setOption(option_sinapsvg); 
 			},
 		);
-	</script>
+	</script><!-- start of sinapsvg -->
 
 	<script src="assets/js/lib/esl2.js"></script>
 	<script src="assets/js/lib/dat.gui.min.js"></script>
@@ -681,175 +867,6 @@
 		  //toLocaleTimeString() 方法可根据本地时间把 Date 对象的时间部分转换为字符串，并返回结果
 		  
 	}
-</script>
-
-
-<script type="text/javascript">
-// 路径配置
-var dataLine=[4, 8, 15, 13, 12, 6, 10];
-	require([
-			'echarts',
-			'echarts/chart/bar' ,// 使用柱状图就加载bar模块，按需加载
-			'echarts/chart/line',
-			'echarts/chart/gauge',
-			'echarts/component/legend',
-			'echarts/component/tooltip'
-		], function (echarts) {
-
-			var chartLine = echarts.init(document.getElementById('realtimeLine'), null, {
-
-			});
-
-			var optionLine = {
-				title : {
-        text: '最近一周Gamma剂量率变化',
-        subtext: '环境监测'
-    },
-    tooltip : {
-        trigger: 'axis'
-    },
-    legend: {
-        data:['环境监测0']
-    },
-    toolbox: {
-        show : true,
-        feature : {
-            mark : {show: true},
-            dataView : {show: true, readOnly: false},
-            restore : {show: true},
-            saveAsImage : {show: true}
-        }
-    },
-    calculable : true,
-    xAxis : [
-        {
-            type : 'category',
-            boundaryGap : false,
-            data : ['周一','周二','周三','周四','周五','周六','周日']
-        }
-    ],
-    yAxis : [
-        {
-            type : 'value',
-            axisLabel : {
-                formatter: '{value} mGy/h'
-            }
-        }
-    ],
-    series : [
-        {
-            name:'环境监测0',
-            type:'line',
-			data:dataLine,
-            markPoint : {
-                data : [
-                    {type : 'max', name: '最大值'},
-                    {type : 'min', name: '最小值'}
-                ]
-            },
-            markLine : {
-                data : [
-                    {type : 'average', name: '平均值'}
-                ]
-            }
-		},
-		{
-							name:'环境0',
-							type:'gauge',
-							radius: [0,'60%'],
-							min:0,
-							max:100,
-							splitNumber:10,
-							axisLine: {            // 坐标轴线
-								shadowColor:'#999',//透明
-								shadowBlur:5,
-								lineStyle: {       // 属性lineStyle控制线条样式
-									color: [[0.2, '#228b22'],[0.8, '#48b'],[1, '#ff4500']], 
-									width: 6
-								}
-							},
-							axisTick: {            // 坐标轴小标记
-								splitNumber: 10,   // 每份split细分多少段
-								length :10,        // 属性length控制线长
-								shadowColor:'#999',//透明
-								shadowBlur:5,
-								lineStyle: {       // 属性lineStyle控制线条样式
-									color: 'auto'
-								}
-							},
-							axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
-								shadowColor:'#999',//透明
-								shadowBlur:5,
-								textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-									color: 'auto',
-									fontSize:14
-								}
-							},
-							splitLine: {           // 分隔线
-								show: true,        // 默认显示，属性show控制显示与否
-								length :15,         // 属性length控制线长
-								shadowColor:'#999',//透明
-								shadowBlur:5,
-								lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
-									color: 'auto'
-								}
-							},
-							pointer : {
-								width : 5,
-								shadowColor:'#999',//透明
-								shadowBlur:5,
-							},
-							title : {
-								show : true,
-								offsetCenter: [0, '-37%'],       // x, y，单位px
-								textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-									fontWeight: 'bold',
-									fontSize:18
-								}
-							},
-							detail : {
-								formatter:'{value}',
-								height:40,
-								width:90,
-								backgroundColor:'rgba(10,10,10,1)',
-								offsetCenter: [-3,'40%'],
-								textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-									color: 'auto',
-									fontWeight: 'bolder',
-									fontSize: 28
-								},
-								shadowColor:'#999',//透明
-								shadowBlur:5,
-							},
-							data:[{value: (Math.random()*100).toFixed(2)-0, name: 'mGy/h'}]
-						}
-    ]
-			};
-
-			var timeTicketLine = function () {};
-			clearInterval(timeTicketLine);
-			timeTicketLine = setInterval(function (){
-				nowrv0=(Math.random()*100).toFixed(2)-0;
-				dataLine.shift();
-				dataLine.push(nowrv0);
-				chartLine.setOption({
-					series: [
-						{
-					  		data: [{value:nowrv0, name: 'mGy/h'}] 
-						},
-						{
-							data: dataLine
-						}
-					]
-				});
-				chartLine.setOption(optionLine,true);
-			},2000)
-
-			//chartLine.setOption(optionLine);
-
-		},
-	);
-			
 </script>
 
 

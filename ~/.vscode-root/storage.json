@@ -5,6 +5,7 @@
             "/home/may"
         ],
         "files": [
+            "/home/may/beifen.html",
             "/home/may/pro/webRMS/bin/www",
             "/home/may/pro/echart/echarts-git/gitecharts/echarts/test/dynamicData2.html",
             "/home/may/pro/webRMS/app.js"
@@ -460,5 +461,5 @@
             }
         }
     },
-    "pickerWorkingDir": "/home/may/pro/echart/echarts-git/gitecharts/echarts/test"
+    "pickerWorkingDir": "/home/may"
 }
