@@ -13,15 +13,9 @@
 		<link rel="stylesheet" href="assets/css/bootstrap3-3-7.min.css">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-
-		<script>
-			//var windowHeight=screen.availHeight;
-		</script>
-
 		<!--socket & epics-->
 		<script src="socket.io/socket.io.js"></script>
-		<script src="bower_components/async/dist/async.js"></script>
-		
+		<script src="bower_components/async/dist/async.js"></script>		
 		<!--echarts-->
 		<script type="text/javascript" src="./assets/js/esl2.js"></script>
 		<script src="assets/js/bootstrap3-3-7.min.js"></script>
@@ -54,6 +48,13 @@
 			var datapvo = new Array();	var olen = datapvo.length;	var oo = 0;
 
 		</script>
+
+		<style type="text/css">
+			.boderc{
+				border:2px solid darkred;
+				padding:2em;
+			}
+		</style>
 		
 	</head>
 
@@ -98,11 +99,23 @@
 
 			<!-- 地图map -->
 			<div class="row">
-				<div class="9u 12u(mobile)" id="content">
+				<div class="9u 12u(mobile) container" id="content">
 					<div id="realtimeLine" style="height:700px; width:100%;" class="12u"></div>
 				</div>
 				<div class="3u 12u(mobile)" id="content">
-					<div id="" style="height:700px; width:100%;" class="12u"></div>
+					<div id="" style="height:700px; width:100%;" class="12u boderc">
+						<h2><strong style="font-size:18px; color:darkred">通知公告</strong></h2>
+						<p><a style="font-size:14px; color:dimgrey">中国科学院上海应用物理研究所辐射防护人员通知</a></p>
+						<p><a style="font-size:14px; color:dimgrey">中国科学院上海应用物理研究所辐射防护人员通知</a></p>
+						<p><a style="font-size:14px; color:dimgrey">中国科学院上海应用物理研究所辐射防护人员通知</a></p>
+						<p><a style="font-size:14px; color:dimgrey">中国科学院上海应用物理研究所辐射防护人员通知</a></p>
+						<p><a style="font-size:14px; color:dimgrey">监控室注意事项</a></p>
+						<p><a style="font-size:14px; color:dimgrey">监控室注意事项</a></p>
+						<p><a style="font-size:14px; color:dimgrey">监控室注意事项</a></p>
+						<p><a style="font-size:14px; color:dimgrey">监控室注意事项</a></p>
+						<p><a style="font-size:14px; color:dimgrey">监控室注意事项</a></p>
+						<p><a style="font-size:14px; color:dimgrey">监控室注意事项</a></p>
+					</div>
 				</div>
 			</div>
 			<!-- 地图map -->
@@ -439,12 +452,7 @@
 			async.map(pvs.ai,function(item,callback){//map是遍历函数
 	  			socket.on(item.pvname, function (data) {
 testio = data;
-				// if(document.getElementById(item.pvname)){
-		 		// 	document.getElementById(item.pvname).innerHTML=data;
-				// }
 				datapvi[ii]=data;
-				// chartLine.clear();
-				// chartLine.setOption(optionLine,true); 
 		    	});
 				if(ii<ilen){ii += 1;}else{ii = 0;}
    			}, function(err,results){
