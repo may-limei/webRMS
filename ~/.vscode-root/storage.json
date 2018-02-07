@@ -6,6 +6,7 @@
         ],
         "files": [
             "/home/may/beifen.html",
+            "/home/may/metronic.bootstrap/table_basic.html",
             "/home/may/pro/webRMS/bin/www",
             "/home/may/pro/echart/echarts-git/gitecharts/echarts/test/dynamicData2.html",
             "/home/may/pro/webRMS/app.js"
@@ -70,7 +71,7 @@
         },
         "workbench.action.closeWindow": {
             "id": "workbench.action.closeWindow",
-            "label": "Ctrl+Shift+W",
+            "label": "Ctrl+W",
             "isNative": true
         },
         "workbench.action.closeFolder": {
