@@ -26,7 +26,7 @@
 			var serverIP="127.0.0.1";
 			var socket = io.connect(serverIP+':3031');
 
-			var testio=0;
+			var testio=0;  var test01=0;
 			var env1=0;
 
 			var pvs={
@@ -34,8 +34,8 @@
 					{pvname:"EVMN-GDRM:DoseRate001"},
 					{pvname:"EVMN-GDRM:DoseRate002"},
 					{pvname:"EVMN-GDRM:DoseRate003"},
-					{pvname:"EVMN-GDRM:DoseRate004"},
-					{pvname:"EVMN-GDRM:DoseRate005"},
+					//{pvname:"EVMN-GDRM:DoseRate004"},
+					//{pvname:"EVMN-GDRM:DoseRate005"},
 					{pvname:"ARMS-GDRM:GDoseRate001"}
 				],
 				ao:[
@@ -44,8 +44,62 @@
 					{pvname:"mayHost:ao3"}
 				]
 			};
-			var datapvi = new Array();	var ilen = datapvi.length;	var ii = 0;
-			var datapvo = new Array();	var olen = datapvo.length;	var oo = 0;
+			var datapvi = new Array(4);	var ilen = datapvi.length;	var ii=2;
+			datapvi[1]=1;
+			var datapvo = new Array(3);	var olen = datapvo.length;	var oo = 0;
+
+	// 		async.map("EVMN-GDRM:DoseRate002",function(item,callback){
+    //       socket.on("EVMN-GDRM:DoseRate002", function (data) {
+	// 		  test01=data;
+    //         if(document.getElementById("EVMN-GDRM:DoseRate002")){
+    //          document.getElementById("EVMN-GDRM:DoseRate002").innerHTML=data;
+    //         }
+    //            });
+               
+    //    }, function(err,results){
+    //      callback(err,results); 
+    //    });
+
+			//遍历pvs.ai的各个元素。async保证每个pvs.ai.name事件都能执行回调函数的操作，而不是最后一个才执行
+			async.map(pvs.ai,function(item,callback){//map是遍历函数
+	  			socket.on(item.pvname, function (data) {
+testio = data;
+				datapvi[ii]=data;
+
+				document.getElementById("ii").innerHTML=ii;
+				document.getElementById("iidata").innerHTML=data;
+
+
+				//if(document.getElementById("EVMN-GDRM:DoseRate001")){
+              	document.getElementById("EVMN-GDRM:DoseRate001").innerHTML=datapvi[0];
+				//}
+				//if(document.getElementById("EVMN-GDRM:DoseRate002")){
+              	document.getElementById("EVMN-GDRM:DoseRate002").innerHTML=datapvi[1];
+				//}
+				//if(document.getElementById("EVMN-GDRM:DoseRate003")){
+              	document.getElementById("EVMN-GDRM:DoseRate003").innerHTML=datapvi[2];
+				//}
+				// if(document.getElementById("ARMS-GDRM:GDoseRate001")){
+              	// document.getElementById("ARMS-GDRM:GDoseRate001").innerHTML=datapvi[3];//当前变量的data
+				// }
+				
+				document.getElementById("ARMS-GDRM:GDoseRate001").innerHTML=datapvi[3];
+				if(ii<ilen-1){
+				//注意，此处不是ii<ilen,因为一但ii=ilen-1了（即datapvi[ilen-1])，下一个应该就循环到datapvi[0].
+				//如果条件判断为ii<ilen，则ii从0-4循环，而item.pvname却不受if语句影响，仍按item.pvname自己的顺序（可以看成0-3）循环，
+				//那么ii的顺序就和item.pvname不一致了。
+					//datapvi[ii]=data;
+					ii++;
+				}else{
+					//datapvi[ii]=data;
+					ii = 0;
+				}
+
+		    	});
+				
+   			}, function(err,results){
+	 			callback(err,results); 
+   			});
 
 		</script>
 
@@ -54,8 +108,7 @@
 				border:2px solid darkred;
 				padding:2em;
 			}
-		</style>
-		
+		</style>		
 	</head>
 
 	<body class="right-sidebar">	
@@ -105,6 +158,16 @@
 				<div class="3u 12u(mobile)" id="content">
 					<div id="" style="height:700px; width:100%;" class="12u boderc">
 						<h2><strong style="font-size:18px; color:darkred">通知公告</strong></h2>
+
+						<hr>
+						<p id="ii">ii未连接ii</p>
+						<p id="iidata">iidata未连接data</p>
+						<p id="EVMN-GDRM:DoseRate001">EVMN-GDRM:DoseRate001未连接ii=0</p>
+						<p id="EVMN-GDRM:DoseRate002">EVMN-GDRM:DoseRate002未连接ii=1</p>
+						<p id="EVMN-GDRM:DoseRate003">EVMN-GDRM:DoseRate003未连接ii=2</p>
+						<p id="ARMS-GDRM:GDoseRate001">ARMS-GDRM:GDoseRate001未连接ii=3</p>
+						<hr>
+
 						<p><a style="font-size:14px; color:dimgrey">中国科学院上海应用物理研究所辐射防护人员通知</a></p>
 						<p><a style="font-size:14px; color:dimgrey">中国科学院上海应用物理研究所辐射防护人员通知</a></p>
 						<p><a style="font-size:14px; color:dimgrey">中国科学院上海应用物理研究所辐射防护人员通知</a></p>
@@ -469,11 +532,11 @@ testio = data;
 				env1=(Math.random()*100).toFixed(2)-0;
 				dataLine.push(env1);
 				optionLine.series[0].data=dataLine;
-				optionLine.series[1].data=[{value:env1, name: 'nGy/h'}];
+				optionLine.series[1].data=[{value:testio, name: 'nGy/h'}];
 				//optionLine.xAxis=(new Date()).toLocaleTimeString().replace(/^\D*/,'');
 				//chartLine.clear();
 				chartLine.setOption(optionLine,true);
-			},2000)
+			},1000)
 
 			dataLine.shift();
 			dataLine.push(100);
@@ -565,7 +628,11 @@ testio = data;
 				    type: 'map',
 				    mapType: 'sinap',
 				    mapLabelColor: "#ffffff",
-				    roam:false,
+				    roam:true,
+					scaleLimit:{
+					    max: 0.8,
+					    min: 0.79
+				    },
 				    itemStyle:{
 						normal:{
 							borderColor:'rgba(100,149,237)',
@@ -580,13 +647,7 @@ testio = data;
 							areaColor: '#2a333d'
 						}
 					},
-					data:[
-						{name: 'γ环境监测站1', value: Math.round(testio*1000), geoCoord:[805.126, 786.913]},
-						{name: 'γ环境监测站2', value: Math.round(testio*1000), geoCoord:[535.126, 496.913]},
-						{name: 'γ环境监测站3', value: Math.round(testio*1000), geoCoord:[250.126, 810.913]},
-						{name: 'γ环境监测站4', value: 400, geoCoord:[960.126, 126.913]},
-							{name: 'γ环境监测站5', value: 500, geoCoord:[225.226, 266.913]}
-					],  
+					data:[],  
 					markPoint : {
 						symbol:'circle',
 						symbolSize : 20,
@@ -596,10 +657,10 @@ testio = data;
 								shadowBlur : 10
 						},
 						data : [
-							{name: 'γ环境监测站1', value: Math.round(testio*1000), geoCoord:[805.126, 786.913], itemStyle:{normal:{color:'lime'}}},
-							{name: 'γ环境监测站2', value: Math.round(testio*1000), geoCoord:[535.126, 496.913], itemStyle:{normal:{color:'lime'}}},
-							{name: 'γ环境监测站3', value: Math.round(testio*1000), geoCoord:[250.126, 810.913], itemStyle:{normal:{color:'lime'}}},
-							{name: 'γ环境监测站4', value: 400, geoCoord:[960.126, 126.913], itemStyle:{normal:{color:'lime'}}},
+							{name: 'γ环境监测站1', value: datapvi[0].toFixed(3), geoCoord:[805.126, 786.913], itemStyle:{normal:{color:'lime'}}},
+							{name: 'γ环境监测站2', value: datapvi[1].toFixed(3), geoCoord:[535.126, 496.913], itemStyle:{normal:{color:'lime'}}},
+							{name: 'γ环境监测站3', value: datapvi[2].toFixed(3), geoCoord:[250.126, 810.913], itemStyle:{normal:{color:'lime'}}},
+							{name: 'γ环境监测站4', value: datapvi[3].toFixed(3), geoCoord:[960.126, 126.913], itemStyle:{normal:{color:'lime'}}},
 							{name: 'γ环境监测站5', value: 500, geoCoord:[225.226, 266.913], itemStyle:{normal:{color:'lime'}}}
 						]
 					},					  
@@ -611,8 +672,8 @@ testio = data;
 				    mapLabelColor: "#ffffff",
 				    roam:true,
 				    scaleLimit:{
-					    max: 1.5,
-					    min:0.5
+					    max: 0.8,
+					    min: 0.79
 				    },
 				    itemStyle:{
 						normal:{
@@ -627,7 +688,7 @@ testio = data;
 						emphasis: {
 							areaColor: '#2a333d'
 						}
-					}, 
+					},
 					data:[
 						{name: '103楼', value: Math.round(testio*1000), geoCoord:[772, 243]},
 						{name: '104楼', value: Math.round(testio*1000), geoCoord:[813, 136]},
@@ -659,8 +720,24 @@ testio = data;
 
 
 				// 为echarts对象加载数据 
-				chart_sinapsvg.setOption(option_sinapsvg); 
+				//chart_sinapsvg.setOption(option_sinapsvg); 
 				var nowrv0 = 40;
+
+				var timeTicketsvg=function(){};
+			clearInterval(timeTicketsvg);
+			timeTicketsvg= setInterval(function(){
+				option_sinapsvg.series[0].markPoint.data=[
+					{name: 'γ环境监测站1', value: datapvi[0].toFixed(3), geoCoord:[805.126, 786.913], itemStyle:{normal:{color:'lime'}}},
+					{name: 'γ环境监测站2', value: datapvi[1].toFixed(3), geoCoord:[535.126, 496.913], itemStyle:{normal:{color:'lime'}}},
+					{name: 'γ环境监测站3', value: datapvi[2].toFixed(3), geoCoord:[250.126, 810.913], itemStyle:{normal:{color:'lime'}}},
+					{name: 'γ环境监测站4', value: datapvi[3].toFixed(3), geoCoord:[960.126, 126.913], itemStyle:{normal:{color:'lime'}}},
+					{name: 'γ环境监测站5', value: 500, geoCoord:[225.226, 266.913], itemStyle:{normal:{color:'lime'}}}
+				];
+			//	option_sinapsvg.series[1].data=[{value:testio, name: 'nGy/h'}];
+				chart_sinapsvg.setOption(option_sinapsvg,true);
+			},500)
+
+
 			},
 		);
 	</script><!-- start of sinapsvg -->
