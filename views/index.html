@@ -34,6 +34,20 @@
 				text-align: center;
 			}
 		</style>
+
+		<script>
+			//模拟epics实时数据
+			var ran0=0, ran1=0, ran2=0, ran3=0, ran4=0, ran5=0;
+			setInterval(function{
+				ran0=Math.random()*0.001+5;//产生一个5-5.001的伪随机数
+				ran1=Math.random()*0.001+5;//产生一个5-5.001的伪随机数
+				ran2=Math.random()*0.001+5;//产生一个5-5.001的伪随机数
+				ran3=Math.random()*0.001+5;//产生一个5-5.001的伪随机数
+				ran4=Math.random()*0.001+5;//产生一个5-5.001的伪随机数
+				ran5=Math.random()*0.001+5;//产生一个5-5.001的伪随机数
+			},
+			1500);
+		</script>
 		
 	</head>
 	<body class="homepage">
