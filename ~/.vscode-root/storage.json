@@ -2,6 +2,7 @@
     "openedPathsList": {
         "workspaces": [
             "/home/may/pro/webRMS",
+            "/home/may/pro/mayblog",
             "/home/may"
         ],
         "files": [
@@ -462,5 +463,5 @@
             }
         }
     },
-    "pickerWorkingDir": "/home/may"
+    "pickerWorkingDir": "/home/may/pro"
 }

@@ -1,3 +1,4 @@
 {
-    "git.ignoreLegacyWarning": true
+    "git.ignoreLegacyWarning": true,
+    "workbench.startupEditor": "newUntitledFile"
 }
