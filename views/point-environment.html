@@ -14,11 +14,15 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--socket & epics-->
-		<script src="socket.io/socket.io.js"></script>
-		<script src="bower_components/async/dist/async.js"></script>		
+		<script src="socket.io/socket.io.js" type="text/javascript"></script>
+		<script src="bower_components/async/dist/async.js" type="text/javascript"></script>		
 		<!--echarts-->
 		<script type="text/javascript" src="./assets/js/esl2.js"></script>
-		<script src="assets/js/bootstrap3-3-7.min.js"></script>
+		<script src="assets/js/bootstrap3-3-7.min.js" type="text/javascript"></script>
+		<!--baiduMapApi-->
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=17bAsU5PTlP0opTlUI52MlwiKNcQFLAp"></script>
+		<script type="text/javascript" src="assets/js/AreaRestriction_min.js"></script>
+		<script type="text/javascript" src="assets/js/Heatmap_min.js"></script>
 
 		<script>
 			//socket & EPICS
@@ -150,7 +154,7 @@
 
 				</div>
 
-			<!-- 地图map -->
+			<!-- line -->
 			<div class="row">
 				<div class="9u 12u(mobile) container" id="content">
 					<div id="realtimeLine" style="height:700px; width:100%;" class="12u"></div>
@@ -174,8 +178,9 @@
 				</div>
 			</div>
 			<!-- 地图map -->
-			<div class="wrapper style1">
-				<div id="sinapsvg" style="height:700px; width:100%;" class="12u"></div>
+			<!--div class="wrapper style1"-->
+			<div class="style1" style="padding: 1em 0 1em 0; background:white">
+				<div id="sinapsvg" class="9u" style="height:800px; width:100%;"></div>
 			</div>
 			
 			<!-- Footer -->
@@ -189,21 +194,20 @@
 	</body>
 
 	<!-- 注意:折线图的echarts"必须"放第一个，因为路径配置部分放在了这个文件（pointEnvEchartsLine.js） -->
-	<script src="javascripts/pointEnvEchartsLine.js"></script>	<!-- echarts: line.-->
-	<script src="javascripts/pointEnvEchartsSinapsvg.js"></script>	<!-- echarts: sinapsvg.-->
-
-
+	<script src="javascripts/pointEnvEchartsLine.js" type="text/javascript"></script>	<!-- echarts: line.-->
+	<!--script src="javascripts/pointEnvEchartsSinapsvg.js" type="text/javascript"></script-->	<!-- echarts: sinapsvg.-->
+	<script src="javascripts/pointEnvBaiduMap.js" type="text/javascript"></script>	<!-- echarts: sinapsvg.-->
 
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.dropotron.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/jquery.onvisible.min.js"></script>
-	<!-- script src="assets/js/skel.min.js"></script-->
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="assets/js/jquery.min.js" type="text/javascript"></script>
+	<script src="assets/js/jquery.dropotron.min.js" type="text/javascript"></script>
+	<script src="assets/js/jquery.scrolly.min.js" type="text/javascript"></script>
+	<script src="assets/js/jquery.onvisible.min.js" type="text/javascript"></script>
+	<!-- script src="assets/js/skel.min.js" type="text/javascript"></script-->
+	<script src="assets/js/skel.min.js" type="text/javascript"></script>
+	<script src="assets/js/util.js" type="text/javascript"></script>
+	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js" type="text/javascript"></script><![endif]-->
 
-	<script src="assets/js/main.js"></script>
+	<script src="assets/js/main.js" type="text/javascript"></script>
 
 </html>

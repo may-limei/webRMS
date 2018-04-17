@@ -1392,6 +1392,28 @@ Portlets
   background-color: #555555 !important;
 }
 
+
+
+.portlet-body.color2, .portlet.color0 {
+  background-color: rgb(255,178,72)  !important;
+}
+
+.portlet-body.color3, .portlet.color1 {
+  background-color: rgb(235,129,70) !important;
+}
+
+.portlet-body.color1, .portlet.color2 {
+  background-color: rgb(217,88,80) !important;
+}
+
+.portlet-body.color0, .portlet.color3 {
+  background-color: rgb(137,52,72)  !important;
+}
+
+
+
+
+
 .portlet-body .btn-toolbar {
   margin: 0px !important;
   padding: 0px !important;
